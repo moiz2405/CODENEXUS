@@ -3,7 +3,7 @@ import HomeBar from '../components/common/HomeBar';
 export default function Home() {
   return (
    <>
-   <HomeBar />
+ <h1 className = 'text-red'>HomePage</h1>
    </>
   );
 }
