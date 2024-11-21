@@ -1,9 +1,9 @@
 
-import HomeBar from '../components/common/HomeBar';
+import HomePage from '../components/common/HomePage';
 export default function Home() {
   return (
    <>
- <h1 className = 'text-red'>HomePage</h1>
+   <HomePage />
    </>
   );
 }
