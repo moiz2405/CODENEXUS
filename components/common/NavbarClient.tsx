@@ -3,6 +3,7 @@
 import { usePathname } from "next/navigation";
 import HomeBar from '../common/HomeBar';
 import PageBar from '../common/PageBar';
+import Bottombar from "../common/BottomBar";
 
 const NavbarClient = () => {
   const pathname = usePathname();  // Get the current pathname
@@ -13,6 +14,7 @@ const NavbarClient = () => {
   return (
     <div>
       {isHomePage ? <HomeBar /> : <PageBar />}
+      {isHomePage && <Bottombar />} {/* Render BottomBar only on the homepage */}
     </div>
   );
 };
