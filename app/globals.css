@@ -12,6 +12,14 @@ body.dark {
   color: white; /* Light text on dark background */
 }
 
+body {
+  @apply bg-white text-black; /* Default light theme styles */
+}
+
+body.dark {
+  @apply bg-gray-800 text-white; /* Dark theme styles */
+}
+
 a {
   color: #2d334a;
   transition: color 0.3s ease;
@@ -44,12 +52,6 @@ body.dark button {
   color: white;
 }
 
-@media (max-width: 480px) {
-  .courses-grid {
-    gap: 15px;
-  }
-}
-
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -78,7 +80,6 @@ body.dark button {
   font-weight: bold;
 }
 
-/* Container for the form */
 .form-container {
   max-width: 600px;
   margin: 0 auto;
@@ -296,7 +297,7 @@ body.dark button {
 
 .watch-button {
   background-color: #007bff;
-  color: #fff;
+  color: white;
   border: none;
   padding: 10px 15px;
   font-size: 16px;
@@ -314,88 +315,7 @@ body.dark button {
   outline: none;
 }
 
-@media (max-width: 768px) {
-  .courses-container {
-    padding: 15px;
-  }
-
-  .courses-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .course-card {
-    margin-bottom: 20px;
-  }
-}
-
-.courses-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 20px;
-  padding: 20px;
-  box-sizing: border-box;
-}
-
-.course-item {
-  background-color: #fff;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease-in-out;
-}
-
-.course-item:hover {
-  transform: scale(1.05);
-}
-
-.thumbnail-container {
-  width: 100%;
-  padding-top: 56.25%;
-  position: relative;
-}
-
-.thumbnail {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-bottom: 2px solid #ddd;
-}
-
-.course-info {
-  padding: 15px;
-  text-align: center;
-}
-
-.course-info h3 {
-  font-size: 18px;
-  font-weight: bold;
-  margin: 10px 0;
-}
-
-.view-course-button {
-  background-color: #1e88e5;
-  color: white;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.view-course-button:hover {
-  background-color: #1565c0;
-}
-
-.loading,
-.error {
-  text-align: center;
-  font-size: 18px;
-  padding: 20px;
-}
-
+/* Custom Sidebar Styling */
 @layer base {
   :root {
     --sidebar-background: 0 0% 98%;
@@ -412,18 +332,16 @@ body.dark button {
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-accent: 240 3.9% 87.1%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 240 3.3% 87.1%;
+    --sidebar-ring: 0 0% 20%;
   }
-}
-
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
+  .custom-sidebar {
+    background-color: var(--sidebar-background);
+    color: var(--sidebar-foreground);
+    border: 1px solid var(--sidebar-border);
+    box-shadow: inset 0 0 20px var(--sidebar-border);
+    transition: 0.3s ease;
   }
 }

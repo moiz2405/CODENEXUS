@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import "./globals.css";
 import NavbarClient from '../components/common/NavbarClient';
+import { ThemeProvider } from "../context/themecontext"; // Ensure this is imported
 
 export const metadata: Metadata = {
   title: "CodeNexus",
@@ -15,8 +16,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <NavbarClient />
-        {children}
+        <ThemeProvider>
+          <NavbarClient />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

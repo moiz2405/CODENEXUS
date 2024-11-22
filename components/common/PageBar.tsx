@@ -1,70 +1,68 @@
 "use client";
 
-import { useState } from "react";
-import Link from "next/link";
-import { cn } from "../../lib/utils"; // Optional utility for conditional classes
-import { Menu, X } from "lucide-react"; // Icons for the menu
+import React, { useState } from "react";
+import { FaBars, FaSearch, FaBell, FaSun, FaMoon } from "react-icons/fa";
+import PathCarousel from "../../components/courses/PathCarousel";
+import CourseDisplay from "../../components/courses/CourseDisplay";
+import { useTheme } from "../../context/themecontext";
 
-export default function PageBar() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+const Pagebar: React.FC = () => {
+  const { isDarkMode, toggleDarkMode } = useTheme();
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedPath, setSelectedPath] = useState("Full Stack");
+  const [courses, setCourses] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const navItems = [
-    { href: "/", label: "Home" },
-    { href: "/about", label: "About" },
-    { href: "/services", label: "Services" },
-    { href: "/blog", label: "Blog" },
-    { href: "/contact", label: "Contact" },
-  ];
+  const paths = ["Full Stack", "Front End", "Back End", "DevOps", "Cybersecurity", "DSA", "AI/ML"];
 
   return (
-    <header className="bg-[#1a1a1a] text-white shadow-md">
-      <div className="container mx-auto px-4 flex justify-between items-center h-16">
-        {/* Logo */}
-        <Link href="/" className="text-2xl font-bold text-[#6f7a4b]">
-          MyLogo
-        </Link>
+    <div style={{ paddingTop: "4rem" }}>
+      <nav
+        className={`flex justify-between items-center px-4 py-2 fixed top-0 w-full z-10 ${
+          isDarkMode
+            ? "bg-gray-800 text-white"
+            : "bg-white text-gray-800"
+        } backdrop-blur-lg bg-opacity-40 border-b ${
+          isDarkMode ? "border-gray-600" : "border-gray-200"
+        }`}
+        style={{
+          backdropFilter: "blur(10px)", // Apply blur effect for glassy look
+          WebkitBackdropFilter: "blur(10px)", // For Safari compatibility
+        }}
+      >
+        <div className="flex items-center">
+          <FaBars size={24} />
+          <span className="font-bold ml-2">CodeNexus</span>
+        </div>
+        <div className="flex items-center space-x-2">
+          <input
+            type="text"
+            placeholder="Search and Learn"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className={`p-2 rounded ${
+              isDarkMode ? "bg-gray-800 text-white" : "bg-gray-200 text-black"
+            }`}
+          />
+          <FaSearch />
+        </div>
+        <div className="flex items-center space-x-4">
+          <FaBell />
+          <button onClick={toggleDarkMode}>
+            {isDarkMode ? <FaSun /> : <FaMoon />}
+          </button>
+        </div>
+      </nav>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex gap-6">
-          {navItems.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="text-lg hover:text-[#6f7a4b] transition-colors"
-            >
-              {item.label}
-            </Link>
-          ))}
-        </nav>
-
-        {/* Mobile Menu Toggle */}
-        <button
-          className="md:hidden flex items-center justify-center w-10 h-10 text-white hover:text-[#6f7a4b] transition"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-          aria-label="Toggle menu"
-        >
-          {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-        </button>
+      <PathCarousel paths={paths} onSelectPath={setSelectedPath} />
+      <div className="mt-8">
+        {loading && <div>Loading...</div>}
+        {error && <div>{error}</div>}
+        {!loading && !error && courses.length > 0 && <CourseDisplay courses={courses} />}
       </div>
-
-      {/* Mobile Navigation */}
-      {isMenuOpen && (
-        <nav className="md:hidden bg-[#1a1a1a] text-white">
-          <ul className="flex flex-col gap-4 p-4">
-            {navItems.map((item) => (
-              <li key={item.href}>
-                <Link
-                  href={item.href}
-                  className="block py-2 px-3 rounded-lg hover:bg-[#6f7a4b] hover:text-white transition"
-                  onClick={() => setIsMenuOpen(false)} // Close menu on click
-                >
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
-      )}
-    </header>
+    </div>
   );
-}
+};
+
+export default Pagebar;
