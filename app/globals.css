@@ -8,7 +8,7 @@ body {
 }
 
 body.dark {
-  background-color: #121212; /* Dark background */
+  background-color: #202020; /* Dark background */
   color: white; /* Light text on dark background */
 }
 
@@ -318,30 +318,20 @@ body.dark button {
 /* Custom Sidebar Styling */
 @layer base {
   :root {
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-background: #f9f9f9; /* Light background for sidebar */
+    --sidebar-foreground: #333;
   }
+
   .dark {
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.9% 87.1%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 240 3.3% 87.1%;
-    --sidebar-ring: 0 0% 20%;
+    --sidebar-background: #202020; /* Dark background for sidebar */
+    --sidebar-foreground: #fff;
   }
+
   .custom-sidebar {
     background-color: var(--sidebar-background);
     color: var(--sidebar-foreground);
-    border: 1px solid var(--sidebar-border);
-    box-shadow: inset 0 0 20px var(--sidebar-border);
+    border: 1px solid #ccc;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.1);
     transition: 0.3s ease;
   }
 }

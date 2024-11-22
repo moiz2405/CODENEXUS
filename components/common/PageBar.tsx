@@ -9,12 +9,11 @@ import { useTheme } from "../../context/themecontext";
 const Pagebar: React.FC = () => {
   const { isDarkMode, toggleDarkMode } = useTheme();
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedPath, setSelectedPath] = useState("Full Stack");
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const paths = ["Full Stack", "Front End", "Back End", "DevOps", "Cybersecurity", "DSA", "AI/ML"];
+
 
   return (
     <div style={{ paddingTop: "4rem" }}>
@@ -55,7 +54,6 @@ const Pagebar: React.FC = () => {
         </div>
       </nav>
 
-      <PathCarousel paths={paths} onSelectPath={setSelectedPath} />
       <div className="mt-8">
         {loading && <div>Loading...</div>}
         {error && <div>{error}</div>}
