@@ -4,8 +4,8 @@ import React from "react";
 const Homepage: React.FC = () => {
   return (
     <div className="flex flex-col items-center text-center mt-10">
-      <h1 className="text-4xl font-bold  text-purple-500">
-        Your Journey to <span className="text-[#ffd803]">MASTERY</span> Starts HERE!
+      <h1 className="text-4xl font-bold  text-purple-500 ">
+        Your Journey to <span className="text-[#ffd803] shadow-lime-500 hover:text-white ">MASTERY</span> Starts HERE!
       </h1>
       <p className="text-yellow-300-400 mt-4 text-xl max-w-xl">
         LEARN, GROW, GLOW.
@@ -16,7 +16,9 @@ const Homepage: React.FC = () => {
           alt="OpenPeeps Illustration"
           className="w-48 h-auto mt-6 ml-10"
         />
-        <button className="bg-[#ffd803] text-purple-700 px-6 py-3 rounded hover:brightness-110 mt-[-300px]">
+        <button
+
+        className="bg-green-500 text-black px-6 py-3 rounded-2xl hover:brightness-110 mt-[-300px]">
           Start Learning Now →
         </button>
       </div>

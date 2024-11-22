@@ -24,7 +24,7 @@ const Bottombar: React.FC = () => {
   ];
 
   return (
-    <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-6 bg-[#fffffe] py-2 px-4 rounded-full shadow-lg">
+    <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-6 bg-green-500 py-2 px-4 rounded-full shadow-lg">
       {sidebarItems.map((item) => (
         <div
           key={item.name}

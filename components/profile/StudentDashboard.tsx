@@ -1,7 +1,8 @@
+"use client";
 import { useState } from 'react'
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Progress } from "@/components/ui/progress"
+import { Button } from "../../components/ui/button"
+import { Card, CardContent, CardHeader, CardTitle } from "../../components/ui/card"
+import { Progress } from "../../components/ui/progress"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -9,7 +10,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+} from "../../components/ui/dropdown-menu"
 import { Award, Bell, BookOpen, CheckSquare, ChevronLeft, ChevronRight, Clock, Code, LogOut, Menu, MessageSquare, Settings, User, Video, Bookmark, Home, GraduationCap } from 'lucide-react'
 
 export default function StudentDashboard() {
