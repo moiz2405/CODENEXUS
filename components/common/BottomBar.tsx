@@ -24,7 +24,8 @@ const Bottombar: React.FC = () => {
   ];
 
   return (
-    <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-6 bg-black py-2 px-4 rounded-full shadow-lg">
+    <div className="z-10 fixed bottom-4 left-1/2 transform -translate-x-1/2 
+    flex space-x-6 bg-[#202020] py-2 px-4 rounded-full shadow-lg border">
       {sidebarItems.map((item) => (
         <div
           key={item.name}
@@ -33,12 +34,13 @@ const Bottombar: React.FC = () => {
           onMouseLeave={() => setHovered(null)}
         >
           <Link href={item.link}>
-            <div className="flex flex-col items-center text-center text-[#272343] hover:text-[#ffd803]">
+            <div className="flex flex-col items-center text-center text-white hover:text-[#ffd803]">
               <div className="text-2xl">{item.icon}</div>
             </div>
           </Link>
           {hovered === item.name && (
-            <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 bg-[#ffd803] text-[#272343] text-sm px-2 py-1 rounded shadow-lg">
+            <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 
+            bg-[#ffd803] text-[#272343] text-sm px-2 py-1 rounded shadow-lg">
               {item.name}
             </div>
           )}

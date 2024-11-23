@@ -109,22 +109,18 @@ const PathCarouselWithCourses: React.FC<PathCarouselWithCoursesProps> = ({
                 {/* Path Carousel */}
                 <div
                     ref={containerRef}
-                    className="overflow-x-auto scrollbar-hide relative"
+                    className="overflow-x-auto scrollbar-hide relative px-4 py-3"
                     onScroll={checkScroll}
                 >
-                    <div className="flex gap-2 px-4 py-3">
+                    <div className="flex gap-4 overflow-x-auto">
                         <button
                             onClick={() => onSelectPath('')}
                             className={`px-5 py-2 rounded-lg
                                 text-sm font-medium whitespace-nowrap
                                 transition-all duration-200 ease-out
                                 ${!selectedPath
-                                    ? (isDarkMode
-                                        ? 'bg-white text-black'
-                                        : 'bg-black text-white')
-                                    : (isDarkMode
-                                        ? 'bg-gray-800 text-gray-300 hover:bg-gray-700'
-                                        : 'bg-gray-100 text-gray-800 hover:bg-gray-200')
+                                    ? (isDarkMode ? 'bg-white text-black' : 'bg-black text-white')
+                                    : (isDarkMode ? 'bg-gray-800 text-gray-300 hover:bg-gray-700' : 'bg-gray-100 text-gray-800 hover:bg-gray-200')
                                 }`}>
                             All Courses
                         </button>
@@ -136,12 +132,8 @@ const PathCarouselWithCourses: React.FC<PathCarouselWithCoursesProps> = ({
                                     text-sm font-medium whitespace-nowrap
                                     transition-all duration-200 ease-out
                                     ${selectedPath === path
-                                        ? (isDarkMode
-                                            ? 'bg-white text-black'
-                                            : 'bg-black text-white')
-                                        : (isDarkMode
-                                            ? 'bg-gray-800 text-gray-300 hover:bg-gray-700'
-                                            : 'bg-gray-100 text-gray-800 hover:bg-gray-200')
+                                        ? (isDarkMode ? 'bg-white text-black' : 'bg-black text-white')
+                                        : (isDarkMode ? 'bg-gray-800 text-gray-300 hover:bg-gray-700' : 'bg-gray-100 text-gray-800 hover:bg-gray-200')
                                     }`}>
                                 {path}
                             </button>
@@ -164,18 +156,16 @@ const PathCarouselWithCourses: React.FC<PathCarouselWithCoursesProps> = ({
 
                 {!loading && !error && courses.length === 0 && (
                     <p className={`text-center ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>
-                        No courses available {selectedPath && `for ${selectedPath}`}.
+                        No courses available {selectedPath && `for ${selectedPath}`} .
                     </p>
                 )}
 
                 {/* Course Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {courses.map((course) => (
-                        <div key={course.id}
-                            className={`rounded-lg transition-shadow duration-300 ${isDarkMode
-                                ? 'bg-gray-800 hover:bg-gray-700'
-                                : 'bg-white hover:shadow-lg'
-                                }`}>
+                        <div key={course.id} className={`rounded-lg transition-shadow duration-300 ${isDarkMode
+                            ? 'bg-gray-800 hover:bg-gray-700'
+                            : 'bg-white hover:shadow-lg'}`}>
                             <img
                                 className="w-full h-48 object-cover rounded-t-lg"
                                 src={course.thumbnailUrl || '/api/placeholder/400/300'}
