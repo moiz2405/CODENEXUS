@@ -102,7 +102,7 @@ export default function Layout() {
                     )}
                     style={{
                         width: "100vw", // Full width
-                        height: "4rem", // Navbar height
+                        height: "5rem", // Navbar height
                         backdropFilter: "blur(10px)",
                         WebkitBackdropFilter: "blur(10px)",
                     }}

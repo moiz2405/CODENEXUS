@@ -69,6 +69,45 @@
   color: white;
   animation: spin 1s linear infinite;
 }
+.courses-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Auto adjust column width */
+  gap: 1.5rem; /* Add space between course cards */
+}
+
+
+.course-card {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.course-thumbnail {
+  width: 100%;
+  height: auto;
+  border-bottom: 2px solid #e5e5e5;
+}
+
+.course-info {
+  padding: 1rem;
+}
+
+.watch-button {
+  display: inline-block;
+  margin-top: 1rem;
+  background-color: #0070f3;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.watch-button:hover {
+  background-color: #005bb5;
+}
 
 /* Spinner animation */
 @keyframes spin {
@@ -325,9 +364,10 @@ body.dark .custom-sidebar {
   color: #888;
 }
 
+
 .courses-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
   gap: 20px;
 }
 
