@@ -49,7 +49,7 @@ const CoursesPage: React.FC = () => {
   }, [selectedPath]);
 
   return (
-    <div className="w-full px-4 py-8">
+    <div className="w-full px-4 py-8 mx-20">
       <PathCarouselWithCourses
         paths={paths}
         selectedPath={selectedPath}

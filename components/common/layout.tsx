@@ -60,16 +60,15 @@ export default function Layout() {
             {/* Sidebar */}
             <aside
                 className={cn(
-                    "fixed left-0 top-0 h-screen flex flex-col transition-all duration-300 ease-in-out shadow-lg", // Added shadow-lg here
+                    "fixed left-0 top-[5rem] h-screen flex flex-col transition-all duration-300 ease-in-out shadow-lg z-50", // Set top to 5rem to ensure sidebar starts below navbar
                     isCollapsed ? "w-24" : "w-64",
-                    isDarkMode ? "bg-#202020 text-white" : "bg-white text-black"
+                    isDarkMode ? "bg-[#202020] text-white" : "bg-white text-black"
                 )}
             >
                 <nav className="flex-1 py-6 px-3 space-y-1">
                     {navItems.map((item) => (
                         <NavItem key={item.label} {...item} isCollapsed={isCollapsed} />
                     ))}
-
                     <NavItem
                         href="/feedback"
                         icon={<MessageSquare className="w-6 h-6" />}
@@ -97,7 +96,7 @@ export default function Layout() {
             <div className="flex-1">
                 <nav
                     className={cn(
-                        "flex justify-between items-center px-4 py-2 fixed top-0 left-0 z-10 shadow-lg", // Added shadow-lg here
+                        "flex justify-between items-center px-4 py-2 fixed top-0 left-0 z-100 shadow-lg", // Keep navbar fixed with z-100
                         isDarkMode ? "bg-[#202020] text-white" : "bg-white text-black"
                     )}
                     style={{
@@ -124,7 +123,7 @@ export default function Layout() {
                                 placeholder="Search and Learn"
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
-                                className={`w-full p-2 pr-10 rounded-3xl ${isDarkMode ? "bg-[#202020] text-white" : "bg-gray-200 text-black"}`} // Changed bg-black for dark mode to bg-[#202020]
+                                className={`w-full p-2 pr-10 rounded-3xl ${isDarkMode ? "bg-[#202020] text-white" : "bg-gray-200 text-black"}`}
                             />
                             <FaSearch className="absolute top-1/2 right-2 transform -translate-y-1/2 text-gray-500" />
                         </div>
@@ -138,9 +137,12 @@ export default function Layout() {
                     </div>
                 </nav>
 
-                {/* Placeholder for content */}
-                <div style={{ paddingTop: "4rem" }}></div>
+                {/* Main content starts here */}
+                <div className="pt-[5rem]"> {/* Adjusted padding to ensure content starts below navbar */}
+                    {/* Your page content */}
+                </div>
             </div>
         </div>
     );
 }
+

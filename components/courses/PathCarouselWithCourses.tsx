@@ -17,6 +17,7 @@ interface PathCarouselWithCoursesProps {
     courses: Course[];
     loading: boolean;
     error: string | null;
+    isDarkMode?: boolean;
 }
 
 const PathCarouselWithCourses: React.FC<PathCarouselWithCoursesProps> = ({
@@ -25,7 +26,8 @@ const PathCarouselWithCourses: React.FC<PathCarouselWithCoursesProps> = ({
     onSelectPath,
     courses,
     loading,
-    error
+    error,
+    isDarkMode = false
 }) => {
     const [showLeftArrow, setShowLeftArrow] = useState(false);
     const [showRightArrow, setShowRightArrow] = useState(true);
@@ -57,24 +59,27 @@ const PathCarouselWithCourses: React.FC<PathCarouselWithCoursesProps> = ({
     }, []);
 
     return (
-        <div className="w-full max-w-7xl mx-auto">
+        <div className={`w-full max-w-7xl mx-auto ${isDarkMode ? 'bg-[#202020] text-white' : 'bg-#202020 text-black'}`}>
             <div
-                className="relative w-full rounded-xl overflow-hidden"
+                className="relative w-full overflow-hidden"
                 onMouseEnter={() => setIsHovering(true)}
                 onMouseLeave={() => setIsHovering(false)}
             >
                 {/* Navigation Buttons */}
                 {showLeftArrow && (
-                    <div className={`absolute left-4 top-1/2 -translate-y-1/2 z-30 transition-all duration-300 transform
-                        ${isHovering ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'}`}>
+                    <div className={`absolute left-0 top-0 bottom-0 flex items-center z-30 transition-all duration-300
+                        ${isDarkMode ? 'bg-gradient-to-r from-[#202020] to-transparent' : 'bg-gradient-to-r from-white to-transparent'}
+                        ${isHovering ? 'opacity-100' : 'opacity-0'}`}>
                         <button
                             onClick={() => scroll('left')}
-                            className="group relative flex items-center justify-center w-10 h-10"
+                            className={`group flex items-center justify-center w-12 h-12 ml-2
+                                ${isDarkMode ? 'hover:bg-gray-800' : 'hover:bg-gray-100'}
+                                rounded-lg transition-colors duration-200`}
                             aria-label="Scroll left"
                         >
                             <ArrowLeftCircle
-                                className="w-8 h-8 text-gray-400 relative z-10 transition-colors duration-200
-                                group-hover:text-blue-500"
+                                className={`w-8 h-8 transition-colors duration-200
+                                    ${isDarkMode ? 'text-gray-400 group-hover:text-white' : 'text-gray-600 group-hover:text-gray-900'}`}
                                 strokeWidth={1.5}
                             />
                         </button>
@@ -82,16 +87,19 @@ const PathCarouselWithCourses: React.FC<PathCarouselWithCoursesProps> = ({
                 )}
 
                 {showRightArrow && (
-                    <div className={`absolute right-4 top-1/2 -translate-y-1/2 z-30 transition-all duration-300 transform
-                        ${isHovering ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-4'}`}>
+                    <div className={`absolute right-0 top-0 bottom-0 flex items-center z-30 transition-all duration-300
+                        ${isDarkMode ? 'bg-gradient-to-l from-[#202020] to-transparent' : 'bg-gradient-to-l from-white to-transparent'}
+                        ${isHovering ? 'opacity-100' : 'opacity-0'}`}>
                         <button
                             onClick={() => scroll('right')}
-                            className="group relative flex items-center justify-center w-10 h-10"
+                            className={`group flex items-center justify-center w-12 h-12 mr-2
+                                ${isDarkMode ? 'hover:bg-gray-800' : 'hover:bg-gray-100'}
+                                rounded-lg transition-colors duration-200`}
                             aria-label="Scroll right"
                         >
                             <ArrowRightCircle
-                                className="w-8 h-8 text-gray-400 relative z-10 transition-colors duration-200
-                                group-hover:text-blue-500"
+                                className={`w-8 h-8 transition-colors duration-200
+                                    ${isDarkMode ? 'text-gray-400 group-hover:text-white' : 'text-gray-600 group-hover:text-gray-900'}`}
                                 strokeWidth={1.5}
                             />
                         </button>
@@ -101,38 +109,40 @@ const PathCarouselWithCourses: React.FC<PathCarouselWithCoursesProps> = ({
                 {/* Path Carousel */}
                 <div
                     ref={containerRef}
-                    className="overflow-x-auto scrollbar-hide relative px-2"
+                    className="overflow-x-auto scrollbar-hide relative"
                     onScroll={checkScroll}
                 >
-                    <div className="flex gap-3 px-4 py-4 justify-center">
+                    <div className="flex gap-2 px-4 py-3">
                         <button
                             onClick={() => onSelectPath('')}
-                            className={`relative px-4 py-2 rounded-full
-                                text-sm font-medium
-                                transition-all duration-300 ease-out
-                                transform hover:scale-105 active:scale-95
+                            className={`px-5 py-2 rounded-lg
+                                text-sm font-medium whitespace-nowrap
+                                transition-all duration-200 ease-out
                                 ${!selectedPath
-                                    ? 'bg-gradient-to-r from-blue-600 to-blue-500 text-white shadow-md hover:from-blue-700 hover:to-blue-600'
-                                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-gray-900'
-                                }
-                                focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2`}
-                        >
+                                    ? (isDarkMode
+                                        ? 'bg-white text-black'
+                                        : 'bg-black text-white')
+                                    : (isDarkMode
+                                        ? 'bg-gray-800 text-gray-300 hover:bg-gray-700'
+                                        : 'bg-gray-100 text-gray-800 hover:bg-gray-200')
+                                }`}>
                             All Courses
                         </button>
                         {paths.map((path) => (
                             <button
                                 key={path}
                                 onClick={() => onSelectPath(path)}
-                                className={`relative px-4 py-2 rounded-full
-                                    text-sm font-medium
-                                    transition-all duration-300 ease-out
-                                    transform hover:scale-105 active:scale-95
+                                className={`px-5 py-2 rounded-lg
+                                    text-sm font-medium whitespace-nowrap
+                                    transition-all duration-200 ease-out
                                     ${selectedPath === path
-                                        ? 'bg-gradient-to-r from-blue-600 to-blue-500 text-white shadow-md hover:from-blue-700 hover:to-blue-600'
-                                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-gray-900'
-                                    }
-                                    focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2`}
-                            >
+                                        ? (isDarkMode
+                                            ? 'bg-white text-black'
+                                            : 'bg-black text-white')
+                                        : (isDarkMode
+                                            ? 'bg-gray-800 text-gray-300 hover:bg-gray-700'
+                                            : 'bg-gray-100 text-gray-800 hover:bg-gray-200')
+                                    }`}>
                                 {path}
                             </button>
                         ))}
@@ -144,7 +154,7 @@ const PathCarouselWithCourses: React.FC<PathCarouselWithCoursesProps> = ({
             <div className="mt-8 px-4">
                 {loading && (
                     <div className="flex justify-center items-center h-40">
-                        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
+                        <div className={`animate-spin rounded-full h-8 w-8 border-b-2 ${isDarkMode ? 'border-white' : 'border-blue-500'}`}></div>
                     </div>
                 )}
 
@@ -153,7 +163,7 @@ const PathCarouselWithCourses: React.FC<PathCarouselWithCoursesProps> = ({
                 )}
 
                 {!loading && !error && courses.length === 0 && (
-                    <p className="text-center text-gray-500">
+                    <p className={`text-center ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>
                         No courses available {selectedPath && `for ${selectedPath}`}.
                     </p>
                 )}
@@ -161,7 +171,11 @@ const PathCarouselWithCourses: React.FC<PathCarouselWithCoursesProps> = ({
                 {/* Course Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {courses.map((course) => (
-                        <div key={course.id} className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+                        <div key={course.id}
+                            className={`rounded-lg transition-shadow duration-300 ${isDarkMode
+                                ? 'bg-gray-800 hover:bg-gray-700'
+                                : 'bg-white hover:shadow-lg'
+                                }`}>
                             <img
                                 className="w-full h-48 object-cover rounded-t-lg"
                                 src={course.thumbnailUrl || '/api/placeholder/400/300'}
@@ -169,19 +183,29 @@ const PathCarouselWithCourses: React.FC<PathCarouselWithCoursesProps> = ({
                             />
                             <div className="p-4">
                                 <div className="flex justify-between items-start mb-2">
-                                    <h3 className="text-lg font-semibold text-gray-900">{course.title}</h3>
-                                    <span className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full">
+                                    <h3 className={`text-lg font-semibold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+                                        {course.title}
+                                    </h3>
+                                    <span className={`text-xs px-2 py-1 rounded-full ${isDarkMode
+                                        ? 'bg-gray-700 text-blue-300'
+                                        : 'bg-blue-100 text-blue-800'
+                                        }`}>
                                         {course.path}
                                     </span>
                                 </div>
                                 {course.description && (
-                                    <p className="text-gray-600 text-sm mb-4 line-clamp-2">{course.description}</p>
+                                    <p className={`text-sm mb-4 line-clamp-2 ${isDarkMode ? 'text-gray-300' : 'text-gray-600'
+                                        }`}>
+                                        {course.description}
+                                    </p>
                                 )}
                                 <button
                                     onClick={() => window.open(course.videoUrl, "_blank")}
-                                    className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition-colors duration-200"
-                                >
-                                    Watch Course
+                                    className={`w-full py-2 px-4 rounded-lg transition-colors duration-300 ${isDarkMode
+                                        ? 'bg-blue-500 text-white hover:bg-blue-400'
+                                        : 'bg-blue-100 text-blue-900 hover:bg-blue-200'
+                                        }`}>
+                                    Watch Video
                                 </button>
                             </div>
                         </div>
