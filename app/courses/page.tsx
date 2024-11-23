@@ -5,7 +5,7 @@ import CourseDisplay from '../../components/courses/CourseDisplay';
 
 // Define a type for Course data
 interface Course {
-  id: string;  // or number, based on your DB schema
+  id: string;
   title: string;
   videoUrl: string;
   thumbnailUrl: string;
@@ -15,12 +15,11 @@ interface Course {
 const CoursesPage: React.FC = () => {
   const paths = ['Full Stack', 'Front End', 'Back End', 'DevOps', 'Cybersecurity', 'DSA', 'AI/ML'];  // Define available paths
   const [selectedPath, setSelectedPath] = useState(paths[0]);  // Default to 'Full Stack'
-  const [courses, setCourses] = useState<Course[]>([]);  // Store fetched courses, now typed
+  const [courses, setCourses] = useState<Course[]>([]);  // Store fetched courses
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    // Reset courses and error whenever the path changes
     setCourses([]);
     setError(null);
     setLoading(true);  // Start loading when path changes
@@ -49,12 +48,15 @@ const CoursesPage: React.FC = () => {
   }, [selectedPath]);  // Re-fetch when path changes
 
   return (
-    <div>
+    <div className="courses-page-container">
       {/* Path carousel for selecting different learning paths */}
-      <PathCarousel paths={paths} onSelectPath={setSelectedPath} />
-
-      {/* Display loading indicator */}
-      {loading && <div className="loading-spinner">Loading courses...</div>}
+      <div className={`path-carousel-wrapper ${loading ? 'loading' : ''}`}>
+        <PathCarousel paths={paths} onSelectPath={setSelectedPath} />
+        {/* Loading overlay */}
+        {loading && <div className="loading-overlay">
+          <div className="loading-spinner">Loading...</div>
+        </div>}
+      </div>
 
       {/* Display error if any */}
       {error && <div className="error-message">{error}</div>}

@@ -42,6 +42,42 @@
   --border: 0, 0%, 25%;
   --input: 0, 0%, 35%;
 }
+/* Overall wrapper for the carousel and the spinner */
+.path-carousel-wrapper {
+  position: relative;
+  display: inline-block;  /* Ensures that the path carousel stays in place */
+  width: 100%;  /* Ensure it takes full width */
+}
+
+/* Loading overlay - covering the carousel */
+.path-carousel-wrapper.loading::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);  /* Slight dark overlay */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Loading spinner style */
+.loading-spinner {
+  font-size: 2rem;
+  color: white;
+  animation: spin 1s linear infinite;
+}
+
+/* Spinner animation */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* You can add more styling to `loading-overlay` if needed */
+
 
 body {
   @apply bg-white text-black transition-all ease-in-out duration-300;
@@ -85,8 +121,9 @@ body.dark a {
 }
 
 body.dark button {
-  background-color: black;
+  background-color: #202020;
   color: white;
+  border: 1px solid #ccc;
 }
 body.dark .custom-sidebar {
   background-color: var(--sidebar-background-dark, #202020);

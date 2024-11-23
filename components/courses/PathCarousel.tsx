@@ -44,11 +44,16 @@ const PathCarousel: React.FC<PathCarouselProps> = ({ paths, onSelectPath }) => {
     return () => window.removeEventListener('resize', checkScroll);
   }, []);
 
+  const isDarkMode = true; // Assume dark mode is enabled. Replace with actual dark mode check.
+
   return (
     <div
-      className="border border-transparent relative w-full max-w-4xl mx-auto rounded-xl overflow-hidden"
+      className={`border border-transparent relative w-full max-w-4xl mx-auto rounded-xl overflow-hidden transition-opacity duration-300 
+        ${isDarkMode ? 'bg-[#202020] text-white' : 'bg-white text-black'}
+      `}
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}
+      style={{ opacity: 1 }}
     >
       {/* Left Navigation Button */}
       {showLeftArrow && (
@@ -114,6 +119,7 @@ const PathCarousel: React.FC<PathCarouselProps> = ({ paths, onSelectPath }) => {
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-gray-900'
                 }
                 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2
+                ${isDarkMode ? 'bg-[#202020] text-white' : 'bg-white text-black'}
               `}
             >
               {path}

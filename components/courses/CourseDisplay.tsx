@@ -1,49 +1,20 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React from 'react';
 
 interface Course {
-  id: number;
+  id: string;  // or number, based on your DB schema
   title: string;
   videoUrl: string;
   thumbnailUrl: string;
-  path: string;
-  description: string | null;
+  description?: string | null;
 }
 
 interface CourseDisplayProps {
+  courses: Course[];
   path: string;
-  loading: boolean;
-  error: string | null;
 }
 
-const CourseDisplay: React.FC<CourseDisplayProps> = ({ path, loading, error }) => {
-  const [courses, setCourses] = useState<Course[]>([]);
-
-  useEffect(() => {
-    const fetchCourses = async () => {
-      try {
-        const res = await fetch(`/api/courses?path=${path}`);
-        if (!res.ok) {
-          throw new Error("Failed to fetch courses");
-        }
-
-        const data = await res.json();
-        console.log(data); // Add this line for debugging
-        setCourses(data);
-      } catch (err: any) {
-        console.error("Error fetching courses:", err);
-      }
-    };
-
-
-    if (path) {
-      fetchCourses();
-    }
-  }, [path]);
-
-  if (loading) return <div className="loading"></div>;
-  if (error) return <div className="error">Error: {error}</div>;
-
+const CourseDisplay: React.FC<CourseDisplayProps> = ({ courses, path }) => {
   return (
     <div className="courses-container border border-transparent">
       {courses.length === 0 ? (
