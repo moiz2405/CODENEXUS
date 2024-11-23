@@ -1,24 +1,61 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+:root {
+  --background: 240, 20%, 10%;
+  --foreground: 240, 20%, 90%;
+  --card: 240, 12%, 18%;
+  --card-foreground: 240, 20%, 85%;
+  --popover: 240, 15%, 13%;
+  --popover-foreground: 240, 20%, 90%;
+  --primary: 210, 90%, 60%;
+  --primary-foreground: 210, 90%, 95%;
+  --secondary: 280, 80%, 65%;
+  --secondary-foreground: 280, 80%, 95%;
+  --muted: 240, 10%, 50%;
+  --muted-foreground: 240, 10%, 90%;
+  --accent: 350, 70%, 50%;
+  --accent-foreground: 350, 70%, 95%;
+  --destructive: 0, 70%, 55%;
+  --destructive-foreground: 0, 70%, 95%;
+  --border: 240, 20%, 30%;
+  --input: 240, 20%, 40%;
+  --ring: 210, 100%, 75%;
+  --chart-1: 210, 100%, 55%;
+  --chart-2: 150, 80%, 45%;
+  --chart-3: 50, 90%, 50%;
+  --chart-4: 20, 80%, 55%;
+  --chart-5: 0, 80%, 60%;
+  --radius: 8px;
+}
+
+.dark {
+  --background: 0, 0%, 12%;
+  --foreground: 0, 0%, 90%;
+  --card: 0, 0%, 20%;
+  --popover: 0, 0%, 18%;
+  --primary: 210, 80%, 60%;
+  --secondary: 280, 70%, 50%;
+  --muted: 0, 0%, 40%;
+  --accent: 350, 60%, 50%;
+  --destructive: 0, 60%, 55%;
+  --border: 0, 0%, 25%;
+  --input: 0, 0%, 35%;
+}
 
 body {
+  @apply bg-white text-black transition-all ease-in-out duration-300;
   font-family: Arial, Helvetica, sans-serif;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 body.dark {
-  background-color: #202020; /* Dark background */
-  color: white; /* Light text on dark background */
+  @apply border border-transparent shadow-inner;
+  background-color: var(--sidebar-background);
+  color: var(--sidebar-foreground);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-body {
-  @apply bg-white text-black; /* Default light theme styles */
-}
-
-body.dark {
-  @apply bg-gray-800 text-white; /* Dark theme styles */
-}
 
 a {
   color: #2d334a;
@@ -48,10 +85,13 @@ body.dark a {
 }
 
 body.dark button {
-  background-color: green;
+  background-color: black;
   color: white;
 }
-
+body.dark .custom-sidebar {
+  background-color: var(--sidebar-background-dark, #202020);
+  color: var(--sidebar-foreground-dark, #ffffff);
+}
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -67,7 +107,7 @@ body.dark button {
 }
 
 .navbar a:hover {
-  background-color: #575757;
+  background-color: black;
   border-radius: 4px;
 }
 
@@ -198,7 +238,7 @@ body.dark button {
   flex: 0 0 auto;
   scroll-snap-align: center;
   padding: 1rem 1.5rem;
-  border: 1px solid #ccc;
+  border: 1px transparent solid;
   border-radius: 10px;
   background-color: #ffffff;
   color: #333;
@@ -318,7 +358,7 @@ body.dark button {
 /* Custom Sidebar Styling */
 @layer base {
   :root {
-    --sidebar-background: #f9f9f9; /* Light background for sidebar */
+    --sidebar-background: white; /* Light background for sidebar */
     --sidebar-foreground: #333;
   }
 

@@ -18,13 +18,11 @@ const Pagebar: React.FC = () => {
   return (
     <div style={{ paddingTop: "4rem" }}>
       <nav
-        className={`flex justify-between items-center px-4 py-2 fixed top-0 w-full z-10 ${
-          isDarkMode
-            ? "bg-gray-800 text-white"
-            : "bg-white text-gray-800"
-        } backdrop-blur-lg bg-opacity-40 border-b ${
-          isDarkMode ? "border-gray-600" : "border-gray-200"
-        }`}
+        className={`flex justify-between items-center px-4 py-2 fixed top-0 w-full z-10 ${isDarkMode
+          ? "bg-#202020 text-white"
+          : "bg-blue-500 text-gray-800"
+          } backdrop-blur-lg bg-opacity-40"
+          }`}
         style={{
           backdropFilter: "blur(10px)", // Apply blur effect for glassy look
           WebkitBackdropFilter: "blur(10px)", // For Safari compatibility
@@ -34,15 +32,14 @@ const Pagebar: React.FC = () => {
           <FaBars size={24} />
           <span className="font-bold ml-2">CodeNexus</span>
         </div>
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center space-x-2 rounded-lg">
           <input
             type="text"
             placeholder="Search and Learn"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className={`p-2 rounded ${
-              isDarkMode ? "bg-gray-800 text-white" : "bg-gray-200 text-black"
-            }`}
+            className={`p-2 rounded-lg ${isDarkMode ? "bg-#202020 text-white" : "bg-gray-200 text-black"
+              }`}
           />
           <FaSearch />
         </div>

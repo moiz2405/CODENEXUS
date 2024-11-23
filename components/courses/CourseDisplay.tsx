@@ -21,19 +21,19 @@ const CourseDisplay: React.FC<CourseDisplayProps> = ({ path, loading, error }) =
 
   useEffect(() => {
     const fetchCourses = async () => {
-        try {
-          const res = await fetch(`/api/courses?path=${path}`);
-          if (!res.ok) {
-            throw new Error("Failed to fetch courses");
-          }
-
-          const data = await res.json();
-          console.log('Fetched Courses:', data); // Add this line for debugging
-          setCourses(data);
-        } catch (err: any) {
-          console.error("Error fetching courses:", err);
+      try {
+        const res = await fetch(`/api/courses?path=${path}`);
+        if (!res.ok) {
+          throw new Error("Failed to fetch courses");
         }
-      };
+
+        const data = await res.json();
+        console.log(data); // Add this line for debugging
+        setCourses(data);
+      } catch (err: any) {
+        console.error("Error fetching courses:", err);
+      }
+    };
 
 
     if (path) {
@@ -41,11 +41,11 @@ const CourseDisplay: React.FC<CourseDisplayProps> = ({ path, loading, error }) =
     }
   }, [path]);
 
-  if (loading) return <div className="loading">Loading...</div>;
+  if (loading) return <div className="loading"></div>;
   if (error) return <div className="error">Error: {error}</div>;
 
   return (
-    <div className="courses-container">
+    <div className="courses-container border border-transparent">
       {courses.length === 0 ? (
         <p>No courses found for {path}.</p>
       ) : (

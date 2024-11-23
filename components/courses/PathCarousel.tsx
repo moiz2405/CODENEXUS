@@ -46,7 +46,7 @@ const PathCarousel: React.FC<PathCarouselProps> = ({ paths, onSelectPath }) => {
 
   return (
     <div
-      className="relative w-full max-w-4xl mx-auto rounded-xl overflow-hidden"
+      className="border border-transparent relative w-full max-w-4xl mx-auto rounded-xl overflow-hidden"
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}
     >
@@ -109,10 +109,9 @@ const PathCarousel: React.FC<PathCarouselProps> = ({ paths, onSelectPath }) => {
                 text-sm font-medium
                 transition-all duration-300 ease-out
                 transform hover:scale-105 active:scale-95
-                ${
-                  selectedPath === path
-                    ? 'bg-gradient-to-r from-blue-600 to-blue-500 text-white shadow-md hover:from-blue-700 hover:to-blue-600'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-gray-900'
+                ${selectedPath === path
+                  ? 'bg-gradient-to-r from-blue-600 to-blue-500 text-white shadow-md hover:from-blue-700 hover:to-blue-600'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-gray-900'
                 }
                 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2
               `}

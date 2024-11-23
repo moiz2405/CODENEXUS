@@ -7,7 +7,7 @@ const HomeBar: React.FC = () => {
   const { isDarkMode, toggleDarkMode } = useTheme();
 
   return (
-    <div className={`flex justify-between items-center px-6 py-4 shadow-md ${isDarkMode ? "bg-gray-800 text-white" : "bg-white text-gray-800"}`}>
+    <div className={`flex justify-between items-center px-6 py-4 shadow-md ${isDarkMode ? "bg-#202020 text-white" : "bg-white text-gray-800"}`}>
       <div className="text-2xl font-bold">
         <img src={"/images/codenexuslogo.png"} alt="Logo" style={{ height: 62, width: 85 }} />
       </div>

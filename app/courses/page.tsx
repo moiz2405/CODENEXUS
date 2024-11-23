@@ -13,7 +13,7 @@ interface Course {
 }
 
 const CoursesPage: React.FC = () => {
-  const paths = ['Full Stack','Front End','Back End','DevOps','Cybersecurity' ,'DSA', 'AI/ML'];  // Define available paths
+  const paths = ['Full Stack', 'Front End', 'Back End', 'DevOps', 'Cybersecurity', 'DSA', 'AI/ML'];  // Define available paths
   const [selectedPath, setSelectedPath] = useState(paths[0]);  // Default to 'Full Stack'
   const [courses, setCourses] = useState<Course[]>([]);  // Store fetched courses, now typed
   const [loading, setLoading] = useState<boolean>(false);
