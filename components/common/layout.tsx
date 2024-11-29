@@ -96,7 +96,7 @@ export default function Layout() {
             <div className="flex-1">
                 <nav
                     className={cn(
-                        "flex justify-between items-center px-4 py-2 fixed top-0 left-0 z-100 shadow-lg", // Keep navbar fixed with z-100
+                        "flex justify-between items-center px-4 py-2 fixed top-0 left-0 z-40 shadow-lg", // Keep navbar fixed with z-100
                         isDarkMode ? "bg-[#202020] text-white" : "bg-white text-black"
                     )}
                     style={{
