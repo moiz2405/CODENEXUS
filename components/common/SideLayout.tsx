@@ -17,7 +17,15 @@ import { cn } from "../../lib/utils";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../ui/tooltip";
 import { useTheme } from "../../context/themecontext";
 
-const NavItem = ({ href, icon, label, isCollapsed }: any) => {
+// Define NavItemProps interface for prop types
+interface NavItemProps {
+    href: string;
+    icon: React.ReactNode;
+    label: string;
+    isCollapsed: boolean;
+}
+
+const NavItem = ({ href, icon, label, isCollapsed }: NavItemProps) => {
     const pathname = usePathname();
     const isActive = pathname === href;
 
@@ -113,7 +121,9 @@ export default function Layout() {
                             onClick={() => setIsCollapsed(!isCollapsed)}
                             className="cursor-pointer"
                         />
-                        <span className="font-bold ml-2">CodeNexus</span>
+                        <Link href="/" >
+                            <span className="font-bold ml-2">CodeNexus</span>
+                        </Link>
                     </div>
 
                     <div className="flex items-center space-x-2 rounded-lg w-72">
@@ -145,4 +155,3 @@ export default function Layout() {
         </div>
     );
 }
-
