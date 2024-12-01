@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useTheme } from "../../context/themecontext";
+import { useTheme } from "../../../context/themecontext";
 
 const HomeBar: React.FC = () => {
   const { isDarkMode, toggleDarkMode } = useTheme();

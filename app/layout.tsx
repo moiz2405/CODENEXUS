@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import "./globals.css";
-import NavbarClient from '../components/common/NavbarClient';
-import { ThemeProvider } from "../context/themecontext"; // Ensure this is imported
+import NavbarClient from '../components/common/navigation/NavbarClient';
+import { ThemeProvider } from "../context/themecontext"; 
 
 export const metadata: Metadata = {
   title: "CodeNexus",
