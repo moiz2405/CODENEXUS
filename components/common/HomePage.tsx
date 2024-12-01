@@ -5,7 +5,7 @@ import Link from "next/link";
 import { bebasNeue } from "../ui/fonts";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../ui/card";
 import { Button } from "../ui/button";
-import { ArrowRight, Code, Layout, Server, Cloud, Shield, Brain, } from "lucide-react";
+import { ArrowRight, Code, Server, Cloud, Shield, Brain, } from "lucide-react";
 
 const pathData = [
   {

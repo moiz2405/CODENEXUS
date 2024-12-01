@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { ArrowLeftCircle, ArrowRightCircle } from 'lucide-react';
+import Image from 'next/image'; // Import Image component from Next.js
 
 interface Course {
     id: string;
@@ -166,10 +167,13 @@ const PathCarouselWithCourses: React.FC<PathCarouselWithCoursesProps> = ({
                         <div key={course.id} className={`rounded-lg transition-shadow duration-300 ${isDarkMode
                             ? 'bg-gray-800 hover:bg-gray-700'
                             : 'bg-white hover:shadow-lg'}`}>
-                            <img
+                            <Image
                                 className="w-full h-48 object-cover rounded-t-lg"
-                                src={course.thumbnailUrl || '/api/placeholder/400/300'}
+                                src={course.thumbnailUrl || '/api/placeholder/400/300'} // Use placeholder if no thumbnail URL
                                 alt={course.title}
+                                width={400} // Add width and height for Next.js Image optimization
+                                height={300}
+                                unoptimized={true} // Disable Next.js optimization if the image is from an external source
                             />
                             <div className="p-4">
                                 <div className="flex justify-between items-start mb-2">
@@ -195,7 +199,7 @@ const PathCarouselWithCourses: React.FC<PathCarouselWithCoursesProps> = ({
                                         ? 'bg-blue-500 text-white hover:bg-blue-400'
                                         : 'bg-blue-100 text-blue-900 hover:bg-blue-200'
                                         }`}>
-                                    Watch Video
+                                    View Course
                                 </button>
                             </div>
                         </div>

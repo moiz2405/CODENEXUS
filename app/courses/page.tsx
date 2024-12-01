@@ -9,6 +9,7 @@ interface Course {
   videoUrl: string;
   thumbnailUrl: string;
   description?: string | null;
+  path: string;
 }
 
 const CoursesPage: React.FC = () => {
@@ -39,14 +40,21 @@ const CoursesPage: React.FC = () => {
         if (data.length === 0) {
           setError(`No courses available${selectedPath ? ` for ${selectedPath}` : ''}`);
         }
-      } catch (err: any) {
-        setError(err.message || 'An error occurred while fetching the courses.');
+      } catch (err: unknown) {
+        // Check if the error is an instance of Error
+        if (err instanceof Error) {
+          setError(err.message);
+        } else {
+          setError('An unknown error occurred.');
+        }
         setLoading(false);
       }
     };
 
     fetchCourses();
   }, [selectedPath]);
+
+
 
   return (
     <div className="w-full px-4 py-8 mx-20">

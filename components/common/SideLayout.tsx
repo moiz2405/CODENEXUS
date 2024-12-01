@@ -17,7 +17,15 @@ import { cn } from "../../lib/utils";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../ui/tooltip";
 import { useTheme } from "../../context/themecontext";
 
-const NavItem = ({ href, icon, label, isCollapsed }: any) => {
+// Define NavItemProps interface for prop types
+interface NavItemProps {
+    href: string;
+    icon: React.ReactNode;
+    label: string;
+    isCollapsed: boolean;
+}
+
+const NavItem = ({ href, icon, label, isCollapsed }: NavItemProps) => {
     const pathname = usePathname();
     const isActive = pathname === href;
 
@@ -145,4 +153,3 @@ export default function Layout() {
         </div>
     );
 }
-
