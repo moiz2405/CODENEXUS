@@ -43,7 +43,7 @@ export default function HomeBar() {
       </div>
 
       <Link
-        href="/contact"
+        href="/courses"
         className={`hidden md:flex items-center gap-2 bg-[#227562] hover:bg-[#1b5d4e] text-white px-6 py-3 rounded-full transition-colors duration-200 ${bebasNeue.className}`}
       >
         Explore Courses

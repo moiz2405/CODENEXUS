@@ -121,7 +121,9 @@ export default function Layout() {
                             onClick={() => setIsCollapsed(!isCollapsed)}
                             className="cursor-pointer"
                         />
-                        <span className="font-bold ml-2">CodeNexus</span>
+                        <Link href="/" >
+                            <span className="font-bold ml-2">CodeNexus</span>
+                        </Link>
                     </div>
 
                     <div className="flex items-center space-x-2 rounded-lg w-72">
