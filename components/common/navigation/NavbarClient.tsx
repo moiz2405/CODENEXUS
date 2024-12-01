@@ -1,12 +1,10 @@
 'use client';
 
 import { usePathname } from "next/navigation";
-import HomeBar from '../common/HomeBar';
-import PageBar from '../common/PageBar';
-import Bottombar from "../common/BottomBar";
-import SideBar from "../common/SideBar";
-import { useTheme } from "../../context/themecontext"; // Import theme context
-import Layout from "./layout";
+import HomeBar from './HomeBar';
+import Bottombar from "./BottomBar";
+import { useTheme } from "../../../context/themecontext"; // Import theme context
+import Layout from "../SideLayout";
 const NavbarClient = () => {
   const pathname = usePathname(); // Get the current pathname
   const { isDarkMode } = useTheme(); // Access dark mode state from context
