@@ -1,92 +1,194 @@
-"use client";
-import React from "react";
-import { useEffect } from "react";
+"use client"
+import  { useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { bebasNeue } from "../ui/fonts";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../ui/card";
+import { Button } from "../ui/button";
+import { ArrowRight, Code, Layout, Server, Cloud, Shield, Brain, } from "lucide-react";
 
-const Homepage: React.FC = () => {
-  useEffect(() => {
-    // Trigger animation on load
-    const elements = document.querySelectorAll('.animate');
-    elements.forEach((el, index) => {
-      el.classList.add('animate__fadeIn');
-      el.style.animationDelay = `${index * 0.2}s`;
-    });
-  }, []);
+const pathData = [
+  {
+    title: "Full Stack",
+    description: "Master both frontend and backend development for complete web applications.",
+    icon: Code,
+    color: "text-blue-500",
+    difficulty: "Beginner",
+  },
+  {
+    title: "Back End",
+    description: "Build robust server-side applications and efficient databases.",
+    icon: Server,
+    color: "text-yellow-500",
+    difficulty: "Advanced",
+  },
+  {
+    title: "DevOps",
+    description: "Streamline development processes and optimize deployment pipelines.",
+    icon: Cloud,
+    color: "text-purple-500",
+    difficulty: "Expert",
+  },
+  {
+    title: "Cybersecurity",
+    description: "Protect digital assets and secure networks against cyber threats.",
+    icon: Shield,
+    color: "text-red-500",
+    difficulty: "Advanced",
+  },
+  {
+    title: "DSA",
+    description: "Master algorithms and data structures for efficient problem-solving.",
+    icon: Brain,
+    color: "text-indigo-500",
+    difficulty: "Intermediate",
+  },
+  {
+    title: "AI/ML",
+    description: "Develop intelligent systems and machine learning models.",
+    icon: Brain,
+    color: "text-pink-500",
+    difficulty: "Expert",
+  },
+];
 
+
+const HomePage: React.FC = () => {
+  const [activeFilter, setActiveFilter] = useState<string | null>(null);
+
+  const filteredPaths = activeFilter
+    ? pathData.filter(path => path.difficulty.toLowerCase() === activeFilter.toLowerCase())
+    : pathData;
+
+  const difficultyFilters = ['Beginner', 'Intermediate', 'Advanced', 'Expert'];
   return (
-    <div className="bg-gradient-to-r from-blue-600 to-purple-800 min-h-screen flex flex-col justify-center items-center text-center py-10">
-      {/* Hero Section */}
-      <h1 className="text-5xl font-extrabold text-white mb-6 animate__animated animate__fadeIn animate__delay-1s">
-        Your Journey to{" "}
-        <span className="text-yellow-400 hover:text-white transition duration-300 ease-in-out shadow-lg">
-          MASTERY
-        </span>{" "}
-        Starts HERE!
-      </h1>
-      <p className="text-yellow-200 mt-4 text-xl max-w-xl mx-auto animate__animated animate__fadeIn animate__delay-1s">
-        LEARN, GROW, GLOW. Discover new paths and skill sets with interactive courses.
-      </p>
+    <div className={`min-h-screen flex flex-col ${bebasNeue.className}`}>
 
-      {/* Hero Section with Image and Button */}
-      <div className="flex flex-col sm:flex-row items-center justify-center mt-10 space-y-6 sm:space-y-0 sm:space-x-8">
-        <img
-          src={"/images/peepcn.png"}
-          alt="OpenPeeps Illustration"
-          className="w-72 h-auto sm:w-80 transition-transform duration-300 hover:scale-105 shadow-xl animate__animated animate__fadeIn animate__delay-2s"
-        />
-        <div className="flex flex-col items-center sm:items-start animate__animated animate__fadeIn animate__delay-2s">
-          <button className="bg-yellow-400 text-black px-8 py-4 rounded-2xl hover:bg-yellow-500 transform transition duration-300 ease-out mt-6 sm:mt-0 shadow-lg hover:shadow-2xl">
-            Start Learning Now →
-          </button>
-        </div>
-      </div>
-
-      {/* Call to Action Section */}
-      <div className="mt-20 flex flex-col items-center">
-        <p className="text-lg text-white mb-6 font-semibold animate__animated animate__fadeIn animate__delay-2s">
-          Explore courses across various paths and start your journey today!
+      <main className="flex flex-col items-center text-center mt-10 flex-grow px-4 md:px-8 lg:px-16">
+        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#227562]">
+          Your Journey to <span className="text-[#6f7a4b]">MASTERY</span> Starts HERE!
+        </h1>
+        <p className="text-[#2d334a] mt-4 text-xl md:text-2xl max-w-2xl">
+          LEARN, GROW, GLOW. Discover your path to success in tech.
         </p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 px-4 sm:px-8 animate__animated animate__fadeIn animate__delay-3s">
-          {/* Path Cards */}
-          {["Full Stack", "Front End", "Back End", "DevOps", "Cybersecurity", "DSA", "AI/ML"].map((path, index) => (
-            <div
-              key={index}
-              className="bg-white text-black p-6 rounded-lg shadow-lg transform transition duration-300 hover:scale-105 hover:shadow-2xl hover:translate-y-2 group"
+        <div className="flex flex-col md:flex-row justify-center items-center mt-10 w-full max-w-4xl">
+          <div className="flex justify-center md:ml-10">
+            <Image
+              src="/images/peepcn.png"
+              alt="OpenPeeps Illustration"
+              width={192}
+              height={192}
+              className="w-48 h-auto mt-6 md:mt-0"
+            />
+          </div>
+          <div className="flex justify-center md:ml-10 md:-mt-72">
+            <Link
+              href="/courses"
+              className="bg-[#6f7a4b] text-white px-6 py-3 rounded hover:brightness-110 transition-all duration-300 inline-block"
             >
-              <h3 className="text-xl font-semibold mb-3 text-center">{path}</h3>
-              <p className="text-gray-700 text-center mb-4">
-                {path === "Full Stack"
-                  ? "Master the skills of both frontend and backend development."
-                  : path === "Front End"
-                    ? "Focus on building interactive, user-friendly web applications."
-                    : path === "Back End"
-                      ? "Dive deep into server-side technologies and database management."
-                      : path === "DevOps"
-                        ? "Learn how to automate, integrate, and manage applications in cloud environments."
-                        : path === "Cybersecurity"
-                          ? "Gain expertise in securing networks, systems, and applications."
-                          : path === "DSA"
-                            ? "Strengthen your problem-solving skills with data structures and algorithms."
-                            : "Dive into Artificial Intelligence and Machine Learning to build smarter systems."}
-              </p>
-              <button className="mt-4 bg-indigo-500 text-white px-6 py-2 rounded-xl hover:bg-indigo-600 transition duration-200 w-full group-hover:scale-110 group-hover:translate-x-2 group-hover:shadow-2xl">
-                Explore Path
-              </button>
-            </div>
+              Start Learning Now →
+            </Link>
+          </div>
+        </div>
+
+        <section className="mt-20 w-full max-w-7xl px-4 mx-auto">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold mb-8 text-[#227562]">Explore Learning Paths</h2>
+          <p className="text-[#2d334a] mt-4 text-xl max-w-3xl mx-auto text-center">
+            Embark on a journey of knowledge and skill acquisition. Choose your path and start your ascent to tech mastery today!
+          </p>
+        </div>
+
+        {/* Difficulty Filter Buttons */}
+        <div className="flex justify-center mb-8 space-x-4">
+          {difficultyFilters.map((filter) => (
+            <Button
+              key={filter}
+              variant={activeFilter === filter ? 'default' : 'outline'}
+              onClick={() => setActiveFilter(activeFilter === filter ? null : filter)}
+              className={`
+                ${activeFilter === filter 
+                  ? 'bg-[#227562] text-white' 
+                  : 'bg-white text-[#227562] border-[#227562]/30 hover:bg-[#227562]/10'}
+              `}
+            >
+              {filter}
+            </Button>
           ))}
         </div>
-      </div>
 
-      {/* Footer Section */}
-      <footer className="bg-black text-white text-center py-4 mt-20 w-full">
-        <p className="text-sm">&copy; 2024 Skill Development Platform | All Rights Reserved</p>
-        <div className="mt-4">
-          <a href="#" className="text-yellow-400 hover:text-white mx-4 transition duration-300">About Us</a>
-          <a href="#" className="text-yellow-400 hover:text-white mx-4 transition duration-300">Contact</a>
-          <a href="#" className="text-yellow-400 hover:text-white mx-4 transition duration-300">Privacy Policy</a>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          {filteredPaths.map((path, index) => (
+            <Card
+              key={index}
+              className="overflow-hidden transition-all duration-300 
+                hover:shadow-xl hover:scale-105 border-2 border-[#227562]/10 
+                bg-white group"
+            >
+              <CardHeader className="pb-4 relative">
+                {/* Difficulty Tag */}
+                <div className="absolute top-4 right-4 text-sm text-[#2d334a]/70">
+                  <span className={`
+                    px-2 py-1 rounded-full text-xs 
+                    ${
+                      path.difficulty === 'Beginner' ? 'bg-green-100 text-green-800' :
+                      path.difficulty === 'Intermediate' ? 'bg-blue-100 text-blue-800' :
+                      path.difficulty === 'Advanced' ? 'bg-yellow-100 text-yellow-800' :
+                      'bg-red-100 text-red-800'
+                    }
+                  `}>
+                    {path.difficulty}
+                  </span>
+                </div>
+                <div className={`${path.color} mb-4 flex justify-center`}>
+                  <path.icon 
+                    size={40} 
+                    strokeWidth={1.5} 
+                    className="group-hover:rotate-12 transition-transform"
+                  />
+                </div>
+                <CardTitle className="text-2xl font-bold text-[#227562] text-center">
+                  {path.title}
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="text-center">
+                <CardDescription className="text-[#2d334a] text-base">
+                  {path.description}
+                </CardDescription>
+              </CardContent>
+              <CardFooter>
+                <Button
+                  asChild
+                  variant="outline"
+                  className="w-full bg-[#6f7a4b] hover:bg-[#227562]/10 
+                    border-[#227562]/20 text-white hover:text-[#227562]/80"
+                >
+                  <Link href={`/courses/${path.title.toLowerCase().replace(' ', '-')}`}>
+                    Explore Path <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
+                </Button>
+              </CardFooter>
+            </Card>
+          ))}
+        </div>
+      </section>
+      </main>
+
+      <footer className="bg-[#227562] text-white text-center py-8 mt-20">
+        <div className="max-w-6xl mx-auto px-4">
+          <p className="text-lg mb-4">&copy; 2024 CodeNexus | Empowering the Next Generation of Tech Innovators</p>
+          <div className="flex justify-center space-x-6">
+            <Link href="/about" className="text-white hover:text-[#6f7a4b] transition duration-300">About Us</Link>
+            <Link href="/contact" className="text-white hover:text-[#6f7a4b] transition duration-300">Contact</Link>
+            <Link href="/privacy" className="text-white hover:text-[#6f7a4b] transition duration-300">Privacy Policy</Link>
+            <Link href="/terms" className="text-white hover:text-[#6f7a4b] transition duration-300">Terms of Service</Link>
+          </div>
         </div>
       </footer>
     </div>
   );
 };
 
-export default Homepage;
+export default HomePage;
+
+
