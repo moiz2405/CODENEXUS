@@ -13,7 +13,7 @@ interface Course {
 }
 
 const CoursesPage: React.FC = () => {
-  const paths = ['Full Stack', 'Front End', 'Back End', 'DevOps', 'Cybersecurity', 'DSA', 'AI/ML'];
+  const paths = ['Full Stack', 'Front End', 'Back End', 'DevOps', 'DSA', 'Web Development','Cyber Security','Cloud Computing','AI/ML'];
   const [selectedPath, setSelectedPath] = useState('');
   const [courses, setCourses] = useState<Course[]>([]);
   const [loading, setLoading] = useState<boolean>(false);

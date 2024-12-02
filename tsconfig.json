@@ -12,7 +12,7 @@
     "noEmit": true,
     "esModuleInterop": true,
     "module": "ESNext", // Use ES modules
-    "moduleResolution": "node",
+    "moduleResolution": "node", // Ensure correct module resolution for Node.js
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
