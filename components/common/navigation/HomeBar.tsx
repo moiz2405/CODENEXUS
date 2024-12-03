@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { bebasNeue } from "../../ui/fonts";
-import { FaBars, FaSun, FaMoon } from "react-icons/fa";
+import { FaSun, FaMoon } from "react-icons/fa";
 import { useTheme } from "../../../context/themecontext";
 
 interface NavLinkProps {
