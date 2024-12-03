@@ -56,9 +56,9 @@ const CoursesPage: React.FC = () => {
 
   const { data: session } = useSession();
 
-  if (!session) {
-    return <div>Please sign in</div>;
-  }
+  // if (!session) {
+  //   return <div>Please sign in</div>;
+  // }
 
   return (
     
