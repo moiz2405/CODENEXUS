@@ -1,8 +1,8 @@
-"use client";
-
 import Link from "next/link";
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight } from "lucide-react";
 import { bebasNeue } from "../../ui/fonts";
+import { FaBars, FaSun, FaMoon } from "react-icons/fa";
+import { useTheme } from "../../../context/themecontext";
 
 interface NavLinkProps {
   href: string;
@@ -19,38 +19,58 @@ const NavLink: React.FC<NavLinkProps> = ({ href, children }) => (
 );
 
 export default function HomeBar() {
-  const navItems = ["Home", "Creator Access", "Reviews", "Community", "Alumni", "About Us"];
+  const { isDarkMode, toggleDarkMode } = useTheme();
+  const navItems = [
+    "Home",
+    "Creator Access",
+    "Reviews",
+    "Community",
+    "Alumni",
+    "About Us",
+  ];
 
   return (
-    <nav className={`flex justify-between items-center px-8 py-4 bg-white border-b border-gray-200 ${bebasNeue.className}`}>
+    <nav
+      className={`flex justify-between items-center px-8 py-4 bg-white border-b border-gray-200 dark:bg-[#202020] ${bebasNeue.className}`}
+    >
       {/* Logo and Title */}
       <div className="flex items-center gap-2">
-        {/* <img
-          src="/images/codenexuslogo.png"
-          alt="Logo"
-          className="h-10 w-auto"
-        /> */}
-        <span className={`text-2xl text-black ${bebasNeue.className}`}>CODENEXUS</span>
+        <span className={`text-2xl text-black dark:text-white ${bebasNeue.className}`}>
+          CODENEXUS
+        </span>
       </div>
 
       {/* Navigation Links */}
       <div className="hidden md:flex items-center gap-8">
         {navItems.map((item) => (
-          <NavLink key={item} href={`/${item.toLowerCase().replace(' ', '-')}`}>
+          <NavLink
+            key={item}
+            href={`/${item.toLowerCase().replace(" ", "-")}`}
+          >
             {item}
           </NavLink>
         ))}
       </div>
 
-      <Link
-        href="/courses"
-        className={`hidden md:flex items-center gap-2 bg-[#227562] hover:bg-[#1b5d4e] text-white px-6 py-3 rounded-full transition-colors duration-200 ${bebasNeue.className}`}
-      >
-        Explore Courses
-        <ArrowRight className="w-4 h-4" />
-      </Link>
+      {/* Right Side Elements: Dark Mode Toggle & Explore Courses */}
+      <div className="flex items-center space-x-4">
+        {/* Dark Mode Toggle */}
+        <button onClick={toggleDarkMode} aria-label="Toggle Dark Mode">
+          {isDarkMode ? <FaSun className="text-black dark:text-white" /> : <FaMoon className="text-black dark:text-white" />}
+        </button>
 
-      <button className="md:hidden text-black" aria-label="Toggle menu">
+        {/* Explore Courses Button */}
+        <Link
+          href="/courses"
+          className={`hidden md:flex items-center gap-2 bg-[#227562] hover:bg-[#1b5d4e] text-white px-6 py-3 rounded-full transition-colors duration-200 ${bebasNeue.className}`}
+        >
+          Explore Courses
+          <ArrowRight className="w-4 h-4" />
+        </Link>
+      </div>
+
+      {/* Mobile Menu Button */}
+      <button className="md:hidden text-black dark:text-white" aria-label="Toggle menu">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="h-6 w-6"
@@ -69,4 +89,3 @@ export default function HomeBar() {
     </nav>
   );
 }
-
