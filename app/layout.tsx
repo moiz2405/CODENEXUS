@@ -1,9 +1,7 @@
 import { Metadata } from "next";
-// import SessionProviderWrapper from "../components/SessionProviderWrapper";
 import "./globals.css";
 import NavbarClient from '../components/common/navigation/NavbarClient';
 import { ThemeProvider } from "../context/themecontext"; 
-// import { SessionProvider } from "next-auth/react";
 import { UserProvider } from "@auth0/nextjs-auth0/client";
 export const metadata = {
   title: "CodeNexus",
@@ -23,22 +21,18 @@ export const metadata = {
   metadataBase: new URL("https://code-nexus-delta.vercel.app/"), // Replace with your deployed URL
 };
 
-
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
       <body>
-        {/* Wrapping the entire layout with SessionProvider to manage session */}
-        {/* <SessionProviderWrapper> */}
           <ThemeProvider>
             <UserProvider>
             <NavbarClient />
             {children}
             </UserProvider>
           </ThemeProvider>
-        {/* </SessionProviderWrapper> */}
       </body>
     </html>
   );
