@@ -13,7 +13,7 @@ export const metadata = {
     description: "AI Skill Development Platform Tailored for You",
     images: [
       {
-        url: "/path/to/your-image.jpg", // Relative path
+        url: "https://raw.githubusercontent.com/moiz2405/codenexus-thumbnails/refs/heads/main/CodeNexus.jpg", // Relative path
         width: 800,
         height: 600,
         alt: "CodeNexus AI Skill Development",
