@@ -1,23 +1,20 @@
-"use client";
-
 import React, { useState } from "react";
-import { FaBars, FaSearch, FaBell, FaSun, FaMoon } from "react-icons/fa";
-import {
-    Home,
-    BookOpen,
-    TrendingUp,
-    FileText,
-    Users,
-    MessageSquare,
-    LogIn,
-} from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { FaBars, FaSearch, FaBell, FaSun, FaMoon } from "react-icons/fa";
+import { useUser } from "@auth0/nextjs-auth0/client";
+import { Button } from "../ui/button"; // Assuming a button component
+import {
+    Tooltip,
+    TooltipContent,
+    TooltipProvider,
+    TooltipTrigger,
+} from "../ui/tooltip";
+import { Home, BookOpen, TrendingUp, FileText, Users, MessageSquare, LogIn } from "lucide-react";
 import { cn } from "../../lib/utils";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../ui/tooltip";
 import { useTheme } from "../../context/themecontext";
 
-// Define NavItemProps interface for prop types
 interface NavItemProps {
     href: string;
     icon: React.ReactNode;
@@ -52,6 +49,7 @@ const NavItem = ({ href, icon, label, isCollapsed }: NavItemProps) => {
 
 export default function Layout() {
     const { isDarkMode, toggleDarkMode } = useTheme();
+    const { user } = useUser();
     const [isCollapsed, setIsCollapsed] = useState(false);
     const [searchQuery, setSearchQuery] = useState("");
 
@@ -68,7 +66,7 @@ export default function Layout() {
             {/* Sidebar */}
             <aside
                 className={cn(
-                    "fixed left-0 top-[5rem] h-screen flex flex-col transition-all duration-300 ease-in-out shadow-lg z-50", // Set top to 5rem to ensure sidebar starts below navbar
+                    "fixed left-0 top-[5rem] h-screen flex flex-col transition-all duration-300 ease-in-out shadow-lg z-50",
                     isCollapsed ? "w-24" : "w-64",
                     isDarkMode ? "bg-[#202020] text-white" : "bg-white text-black"
                 )}
@@ -84,7 +82,6 @@ export default function Layout() {
                         isCollapsed={isCollapsed}
                     />
                 </nav>
-
                 <div
                     className={cn(
                         "p-3 border-t",
@@ -104,18 +101,17 @@ export default function Layout() {
             <div className="flex-1">
                 <nav
                     className={cn(
-                        "flex justify-between items-center px-4 py-2 fixed top-0 left-0 z-40 shadow-lg", // Keep navbar fixed with z-100
+                        "flex justify-between items-center px-4 py-2 fixed top-0 left-0 z-40 shadow-lg",
                         isDarkMode ? "bg-[#202020] text-white" : "bg-white text-black"
                     )}
                     style={{
-                        width: "100vw", // Full width
-                        height: "5rem", // Navbar height
+                        width: "100vw",
+                        height: "5rem",
                         backdropFilter: "blur(10px)",
                         WebkitBackdropFilter: "blur(10px)",
                     }}
                 >
                     <div className="flex items-center">
-                        {/* Hamburger Icon */}
                         <FaBars
                             size={24}
                             onClick={() => setIsCollapsed(!isCollapsed)}
@@ -144,11 +140,31 @@ export default function Layout() {
                         <button onClick={toggleDarkMode}>
                             {isDarkMode ? <FaSun /> : <FaMoon />}
                         </button>
+                        {user ? (
+                            <div className="flex items-center space-x-4">
+                                <Link href="/users/profile">
+                                    <Image
+                                        src={user.picture || "/images/default-avatar.png"}
+                                        alt="User Profile"
+                                        width={32}
+                                        height={32}
+                                        className="rounded-full border-2 border-gray-300"
+                                    />
+                                </Link>
+                                <Button onClick={() => (window.location.href = "/api/auth/logout")}>
+                                    Logout
+                                </Button>
+                            </div>
+                        ) : (
+                            <Button onClick={() => (window.location.href = "/api/auth/login")}>
+                                Login
+                            </Button>
+                        )}
                     </div>
                 </nav>
 
                 {/* Main content starts here */}
-                <div className="pt-[5rem]"> {/* Adjusted padding to ensure content starts below navbar */}
+                <div className="pt-[5rem]">
                     {/* Your page content */}
                 </div>
             </div>
