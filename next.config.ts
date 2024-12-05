@@ -1,7 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  images: {
+    domains: ["lh3.googleusercontent.com"], // Add the Google domain for profile pictures
+  },
+  // other config options
 };
 
 export default nextConfig;

@@ -135,40 +135,41 @@ export default function Layout() {
                         </div>
                     </div>
 
-                        <div className="flex items-center space-x-4">
-                        <FaBell />
-                        <button onClick={toggleDarkMode}>
-                            {isDarkMode ? <FaSun /> : <FaMoon />}
-                        </button>
-  {user ? (
-    <>
-      {/* User Icon (Profile Picture from Google) */}
-      <Link href="/users/profile">
-        <Image
-          src={user.picture || "/images/default-avatar.png"} // Fallback to default avatar
-          alt="User Profile"
-          width={32}
-          height={32}
-          className="rounded-full border-2 border-gray-300"
-        />
-      </Link>
-      {/* Logout Button */}
-      <Button
-        onClick={() => (window.location.href = "/api/auth/logout")}
-        className="ml-4"
-      >
-        Logout
-      </Button>
-    </>
-  ) : (
-    <Button
-      onClick={() => (window.location.href = "/api/auth/login")}
-      className="ml-4"
-    >
-      Login
-    </Button>
-  )}
+                    <div className="flex items-center space-x-4">
+    <FaBell />
+    <button onClick={toggleDarkMode}>
+        {isDarkMode ? <FaSun /> : <FaMoon />}
+    </button>
+    {user ? (
+        <>
+            {/* User Icon (Profile Picture from Google) */}
+            <Link href="/users/profile">
+                <Image
+                    src={user.picture || "/images/default-avatar.png"}
+                    alt={user.name || "User Profile"}
+                    width={32}
+                    height={32}
+                    className="rounded-full border-2 border-gray-300"
+                />
+            </Link>
+            {/* Logout Button */}
+            <Button
+                onClick={() => (window.location.href = "/api/auth/logout")}
+                className="ml-4"
+            >
+                Logout
+            </Button>
+        </>
+    ) : (
+        <Button
+            onClick={() => (window.location.href = "/api/auth/login")}
+            className="ml-4"
+        >
+            Login
+        </Button>
+    )}
 </div>
+
 
                 </nav>
 
