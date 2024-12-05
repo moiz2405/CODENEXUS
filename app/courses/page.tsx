@@ -1,7 +1,6 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import PathCarouselWithCourses from '../../components/courses/PathCarouselWithCourses';
-// import { useSession } from 'next-auth/react';
 // Define a type for Course data
 interface Course {
   id: string;
@@ -54,11 +53,7 @@ const CoursesPage: React.FC = () => {
     fetchCourses();
   }, [selectedPath]);
 
-  // const { data: session } = useSession();
 
-  // if (!session) {
-  //   return <div>Please sign in</div>;
-  // }
 
   return (
     

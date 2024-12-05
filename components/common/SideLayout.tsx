@@ -143,7 +143,7 @@ export default function Layout() {
     {user ? (
         <>
             {/* User Icon (Profile Picture from Google) */}
-            <Link href="/users/profile">
+            <Link href="profile/me">
                 <Image
                     src={user.picture || "/images/default-avatar.png"}
                     alt={user.name || "User Profile"}
