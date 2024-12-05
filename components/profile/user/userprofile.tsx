@@ -2,9 +2,16 @@
 import React from 'react';
 import { useUser } from '@auth0/nextjs-auth0/client';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 function UserProfile() {
   const { user, error, isLoading } = useUser();
+  const router = useRouter();
+
+  const handleLogout = () => {
+    // Use the Auth0 logout API to log the user out
+    window.location.href = '/api/auth/logout'; 
+  };
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -44,7 +51,7 @@ function UserProfile() {
           </div>
         </div>
         <div className="profile-actions">
-          <button className="logout-btn">Logout</button>
+          <button onClick={handleLogout} className="logout-btn">Logout</button>
         </div>
       </div>
     </div>
