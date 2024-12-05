@@ -1,9 +1,9 @@
 import { Metadata } from "next";
-import SessionProviderWrapper from "../components/SessionProviderWrapper";
+// import SessionProviderWrapper from "../components/SessionProviderWrapper";
 import "./globals.css";
 import NavbarClient from '../components/common/navigation/NavbarClient';
 import { ThemeProvider } from "../context/themecontext"; 
-import { SessionProvider } from "next-auth/react";
+// import { SessionProvider } from "next-auth/react";
 import { UserProvider } from "@auth0/nextjs-auth0/client";
 export const metadata = {
   title: "CodeNexus",
@@ -31,14 +31,14 @@ export default function RootLayout({
     <html lang="en">
       <body>
         {/* Wrapping the entire layout with SessionProvider to manage session */}
-        <SessionProviderWrapper>
+        {/* <SessionProviderWrapper> */}
           <ThemeProvider>
             <UserProvider>
             <NavbarClient />
             {children}
             </UserProvider>
           </ThemeProvider>
-        </SessionProviderWrapper>
+        {/* </SessionProviderWrapper> */}
       </body>
     </html>
   );
