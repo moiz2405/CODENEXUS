@@ -50,7 +50,7 @@ const NavItem = ({ href, icon, label, isCollapsed }: NavItemProps) => {
 export default function Layout() {
     const { isDarkMode, toggleDarkMode } = useTheme();
     const { user } = useUser();
-    const [isCollapsed, setIsCollapsed] = useState(false);
+    const [isCollapsed, setIsCollapsed] = useState(true);
     const [searchQuery, setSearchQuery] = useState("");
 
     const navItems = [
