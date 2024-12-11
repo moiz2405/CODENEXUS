@@ -3,6 +3,8 @@ import "./globals.css";
 import NavbarClient from '../components/common/navigation/NavbarClient';
 import { ThemeProvider } from "../context/themecontext"; 
 import { UserProvider } from "@auth0/nextjs-auth0/client";
+
+
 export const metadata = {
   title: "CodeNexus",
   description: "AI Skill Development Platform Tailored for You",
