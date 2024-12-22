@@ -68,7 +68,7 @@ export default function Feedback() {
                         </button>
                     </form>
                     {isSubmitted && (
-                        <p className="mt-4 text-green-800 text-4xl">Thank you for your feedback!</p>
+                        <p className="mt-4 text-yellow-400 text-4xl">Thank you for your feedback!</p>
                     )}
              </div>
         </div>
