@@ -1,6 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+/* slick-carousel styles */
+@import "~slick-carousel/slick/slick.css";
+@import "~slick-carousel/slick/slick-theme.css";
+
 :root {
   --background: 240, 20%, 10%;
   --foreground: 240, 20%, 90%;
