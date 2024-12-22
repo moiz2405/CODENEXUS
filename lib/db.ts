@@ -4,31 +4,31 @@ const path = require('path');
 const fs = require('fs');
 
 // Function to remove the existing database file if it exists
-async function removeOldDatabaseFile() {
-  const dbPath = path.join('/tmp', 'my-database.db'); // Path to your database file
-  console.log(`Checking for old database file at: ${dbPath}`);
+// async function removeOldDatabaseFile() {
+//   const dbPath = path.join('/tmp', 'my-database.db'); // Path to your database file
+//   console.log(`Checking for old database file at: ${dbPath}`);
 
-  try {
-    // Check if the database file exists
-    if (fs.existsSync(dbPath)) {
-      console.log(`Found old database file: ${dbPath}`);
-      console.log('Attempting to delete the file...');
-      fs.unlinkSync(dbPath); // Synchronously delete the file
-      console.log('Old database file deleted successfully.');
-    } else {
-      console.log('No old database file found.');
-    }
-  } catch (error) {
-    console.error('Error removing old database file:', error);
-  }
-}
+//   try {
+//     // Check if the database file exists
+//     if (fs.existsSync(dbPath)) {
+//       console.log(`Found old database file: ${dbPath}`);
+//       console.log('Attempting to delete the file...');
+//       fs.unlinkSync(dbPath); // Synchronously delete the file
+//       console.log('Old database file deleted successfully.');
+//     } else {
+//       console.log('No old database file found.');
+//     }
+//   } catch (error) {
+//     console.error('Error removing old database file:', error);
+//   }
+// }
 
-// Call the function to check if it works
-removeOldDatabaseFile().then(() => {
-  console.log('File removal process completed.');
-}).catch((error) => {
-  console.error('Error during file removal:', error);
-});
+// // Call the function to check if it works
+// removeOldDatabaseFile().then(() => {
+//   console.log('File removal process completed.');
+// }).catch((error) => {
+//   console.error('Error during file removal:', error);
+// });
 // Function to open the database connection
 export async function openDB() {
   const dbPath = path.join('/tmp', 'my-database.db'); // Use the /tmp directory in Vercel
