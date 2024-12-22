@@ -300,6 +300,13 @@ body.dark .custom-sidebar {
   font-weight: bold;
 }
 
+.feedback-background {
+  background-image: url('/public/images/grainy.png'); 
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+}
+
 .form-container {
   max-width: 600px;
   margin: 0 auto;
