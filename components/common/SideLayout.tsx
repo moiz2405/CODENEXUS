@@ -39,9 +39,9 @@ const NavItem = ({ href, icon, label, isCollapsed }: NavItemProps) => {
                     >
                         <div className="w-6 h-6 flex items-center justify-center">{icon}</div>
                         {!isCollapsed ? (
-                            <span className="text-lg">{label}</span>
+                            <span className="text-xs">{label}</span>
                         ) : (
-                            <span className="text-xs text-gray-500">{label}</span>
+                            <span className="text-xs text-white">{label}</span>
                         )}
                     </Link>
                 </TooltipTrigger>
