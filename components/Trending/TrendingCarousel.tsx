@@ -39,7 +39,7 @@ const TrendingCarousel: React.FC = () => {
     {
       id: "5",
       title: "TypeScript Deep Dive",
-      thumbnailUrl: "https://raw.githubusercontent.com/moiz2405/codenexus-thumbnails/refs/heads/main/backend/1.jpg",
+      thumbnailUrl: "https://raw.githubusercontent.com/moiz2405/codenexus-thumbnails/refs/heads/main/backend/3.jpg",
     },
   ];
 
@@ -79,15 +79,8 @@ const TrendingCarousel: React.FC = () => {
             height={400}
             unoptimized={true}
           />
-          <div className="p-4">
-            <h3 className="text-lg font-semibold text-gray-900">{course.title}</h3>
-            <button
-              onClick={() => window.open("#", "_blank")} // Add actual course link here
-              className="w-full py-2 px-4 rounded-lg bg-blue-100 text-blue-900 hover:bg-blue-200 transition-colors duration-300"
-            >
-              View Course
-            </button>
-          </div>
+          
+
         </div>
       ))}
     </Slider>
