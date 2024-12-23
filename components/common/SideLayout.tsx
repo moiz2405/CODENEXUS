@@ -33,12 +33,16 @@ const NavItem = ({ href, icon, label, isCollapsed }: NavItemProps) => {
                     <Link
                         href={href}
                         className={cn(
-                            "flex items-center gap-3 px-4 py-3 text-black hover:bg-gray-800/50 transition-colors rounded-lg",
+                            "flex flex-col items-center gap-1 px-2 py-3 text-black hover:bg-gray-800/50 transition-colors rounded-lg",
                             isActive && "bg-[#6f7a4b] text-white hover:bg-[#6f7a4b]/90"
                         )}
                     >
                         <div className="w-6 h-6 flex items-center justify-center">{icon}</div>
-                        {!isCollapsed && <span className="text-lg">{label}</span>}
+                        {!isCollapsed ? (
+                            <span className="text-lg">{label}</span>
+                        ) : (
+                            <span className="text-xs text-gray-500">{label}</span>
+                        )}
                     </Link>
                 </TooltipTrigger>
                 {isCollapsed && <TooltipContent side="right">{label}</TooltipContent>}
@@ -46,6 +50,7 @@ const NavItem = ({ href, icon, label, isCollapsed }: NavItemProps) => {
         </TooltipProvider>
     );
 };
+
 
 export default function Layout() {
     const { isDarkMode, toggleDarkMode } = useTheme();
@@ -57,7 +62,7 @@ export default function Layout() {
         { href: "/", icon: <Home className="w-6 h-6" />, label: "Home" },
         { href: "/courses", icon: <BookOpen className="w-6 h-6" />, label: "Courses" },
         { href: "/trending", icon: <TrendingUp className="w-6 h-6" />, label: "Trending" },
-        { href: "/resume", icon: <FileText className="w-6 h-6" />, label: "Resume Builder" },
+        // { href: "/resume", icon: <FileText className="w-6 h-6" />, label: "Resume Builder" },
         { href: "/creator", icon: <Users className="w-6 h-6" />, label: "Creator Access" },
     ];
 
