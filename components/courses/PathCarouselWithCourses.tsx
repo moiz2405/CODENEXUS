@@ -121,7 +121,7 @@ const PathCarouselWithCourses: React.FC<PathCarouselWithCoursesProps> = ({
                                 transition-all duration-200 ease-out
                                 ${!selectedPath
                                     ? (isDarkMode ? 'bg-white text-black' : 'bg-black text-white')
-                                    : (isDarkMode ? 'bg-gray-800 text-gray-300 hover:bg-gray-700' : 'bg-gray-100 text-gray-800 hover:bg-gray-200')
+                                    : (isDarkMode ? 'bg-gray-800 text-gray-300 hover:bg-gray-700' : 'bg-gray-100 text-gray-800 border border-purple-400 hover:bg-gray-200 hover:text-black')
                                 }`}>
                             All Courses
                         </button>
@@ -132,9 +132,13 @@ const PathCarouselWithCourses: React.FC<PathCarouselWithCoursesProps> = ({
                                 className={`px-5 py-2 rounded-lg
                                     text-sm font-medium whitespace-nowrap
                                     transition-all duration-200 ease-out
-                                    ${selectedPath === path
-                                        ? (isDarkMode ? 'bg-white text-black' : 'bg-black text-white')
-                                        : (isDarkMode ? 'bg-gray-800 text-gray-300 hover:bg-gray-700' : 'bg-gray-100 text-gray-800 hover:bg-gray-200')
+                                    ${isDarkMode
+                                        ? (selectedPath === path
+                                            ? 'bg-white text-black'
+                                            : 'bg-gray-800 text-gray-300 hover:bg-gray-700') // Dark mode: active and hover styles
+                                        : (selectedPath === path
+                                            ? 'bg-black text-white'
+                                            : 'bg-gray-100 text-gray-800 border border-purple-400 hover:bg-gray-200 hover:text-black') // Light mode: active, border, and hover styles
                                     }`}>
                                 {path}
                             </button>
@@ -166,7 +170,8 @@ const PathCarouselWithCourses: React.FC<PathCarouselWithCoursesProps> = ({
                     {courses.map((course) => (
                         <div key={course.id} className={`rounded-lg transition-shadow duration-300 ${isDarkMode
                             ? 'bg-gray-800 hover:bg-gray-700'
-                            : 'bg-white hover:shadow-lg'}`}>
+                            : 'bg-white hover:shadow-lg border border-gray-300'}`} // Border for light mode
+                        >
                             <Image
                                 className="w-full h-48 object-cover rounded-t-lg"
                                 src={course.thumbnailUrl || '/api/placeholder/400/300'} // Use placeholder if no thumbnail URL

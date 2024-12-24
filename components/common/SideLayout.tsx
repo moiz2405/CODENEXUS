@@ -33,16 +33,18 @@ const NavItem = ({ href, icon, label, isCollapsed }: NavItemProps) => {
                     <Link
                         href={href}
                         className={cn(
-                            "flex flex-col items-center gap-1 px-2 py-3 text-black hover:bg-gray-800/50 transition-colors rounded-lg",
-                            isActive && "bg-[#6f7a4b] text-white hover:bg-[#6f7a4b]/90"
+                            "flex flex-col items-center gap-1 px-2 py-3 hover:bg-gray-800/50 transition-colors rounded-lg",
+                            isActive && "bg-[#6f7a4b] text-white hover:bg-[#6f7a4b]/90",
                         )}
                     >
                         <div className="w-6 h-6 flex items-center justify-center">{icon}</div>
-                        {!isCollapsed ? (
-                            <span className="text-xs">{label}</span>
-                        ) : (
-                            <span className="text-xs text-white">{label}</span>
-                        )}
+                        <span
+                            className={cn(
+                                "text-xs font-bold",
+                            )}
+                        >
+                            {label}
+                        </span>
                     </Link>
                 </TooltipTrigger>
                 {isCollapsed && <TooltipContent side="right">{label}</TooltipContent>}
@@ -50,7 +52,6 @@ const NavItem = ({ href, icon, label, isCollapsed }: NavItemProps) => {
         </TooltipProvider>
     );
 };
-
 
 export default function Layout() {
     const { isDarkMode, toggleDarkMode } = useTheme();
@@ -64,6 +65,7 @@ export default function Layout() {
         { href: "/trending", icon: <TrendingUp className="w-6 h-6" />, label: "Trending" },
         // { href: "/resume", icon: <FileText className="w-6 h-6" />, label: "Resume Builder" },
         { href: "/creator", icon: <Users className="w-6 h-6" />, label: "Creator Access" },
+        { href: "/feedback", icon: <MessageSquare className="w-6 h-6" />, label: "Send Feedback" },
     ];
 
     return (
@@ -72,33 +74,25 @@ export default function Layout() {
             <aside
                 className={cn(
                     "fixed left-0 top-[5rem] h-screen flex flex-col transition-all duration-300 ease-in-out shadow-lg z-50",
-                    isCollapsed ? "w-24" : "w-64",
-                    isDarkMode ? "bg-[#202020] text-white" : "bg-white text-black"
+                    isCollapsed ? "w-30" : "w-44",
+                    isDarkMode ? "bg-[#141414] text-white shadow-black" : "bg-[#E3F2FD] text-black shadow-gray-500"
+
                 )}
             >
                 <nav className="flex-1 py-6 px-3 space-y-1">
                     {navItems.map((item) => (
                         <NavItem key={item.label} {...item} isCollapsed={isCollapsed} />
                     ))}
-                    <NavItem
-                        href="/feedback"
-                        icon={<MessageSquare className="w-6 h-6" />}
-                        label="Send Feedback"
-                        isCollapsed={isCollapsed}
-                    />
+
                 </nav>
+
                 <div
                     className={cn(
                         "p-3 border-t",
-                        isDarkMode ? "border-gray-800" : "border-gray-300"
+                        isDarkMode ? "border-gray-800 text-white" : "border-gray-300 text-black",
                     )}
                 >
-                    <NavItem
-                        href="/login"
-                        icon={<LogIn className="w-6 h-6" />}
-                        label="Login"
-                        isCollapsed={isCollapsed}
-                    />
+
                 </div>
             </aside>
 
@@ -106,8 +100,8 @@ export default function Layout() {
             <div className="flex-1">
                 <nav
                     className={cn(
-                        "flex justify-between items-center px-4 py-2 fixed top-0 left-0 z-40 shadow-lg",
-                        isDarkMode ? "bg-[#202020] text-white" : "bg-white text-black"
+                        "flex justify-between items-center px-4 py-2 fixed top-0 left-0 z-40 shadow-md",
+                        isDarkMode ? "bg-[#141414] text-white shadow-black" : "bg-[#E3F2FD] text-black shadow-gray-500"
                     )}
                     style={{
                         width: "100vw",
@@ -141,39 +135,39 @@ export default function Layout() {
                     </div>
 
                     <div className="flex items-center space-x-4">
-    <FaBell />
-    <button onClick={toggleDarkMode}>
-        {isDarkMode ? <FaSun /> : <FaMoon />}
-    </button>
-    {user ? (
-        <>
-            {/* User Icon (Profile Picture from Google) */}
-            <Link href="profile/me">
-                <Image
-                    src={user.picture || "/images/default-avatar.png"}
-                    alt={user.name || "User Profile"}
-                    width={32}
-                    height={32}
-                    className="rounded-full border-2 border-gray-300"
-                />
-            </Link>
-            {/* Logout Button */}
-            <Button
-                onClick={() => (window.location.href = "/api/auth/logout")}
-                className="ml-4"
-            >
-                Logout
-            </Button>
-        </>
-    ) : (
-        <Button
-            onClick={() => (window.location.href = "/api/auth/login")}
-            className="ml-4"
-        >
-            Login
-        </Button>
-    )}
-</div>
+                        <FaBell />
+                        <button onClick={toggleDarkMode}>
+                            {isDarkMode ? <FaSun /> : <FaMoon />}
+                        </button>
+                        {user ? (
+                            <>
+                                {/* User Icon (Profile Picture from Google) */}
+                                <Link href="profile/me">
+                                    <Image
+                                        src={user.picture || "/images/default-avatar.png"}
+                                        alt={user.name || "User Profile"}
+                                        width={32}
+                                        height={32}
+                                        className="rounded-full border-2 border-gray-300"
+                                    />
+                                </Link>
+                                {/* Logout Button */}
+                                <Button
+                                    onClick={() => (window.location.href = "/api/auth/logout")}
+                                    className="ml-4"
+                                >
+                                    Logout
+                                </Button>
+                            </>
+                        ) : (
+                            <Button
+                                onClick={() => (window.location.href = "/api/auth/login")}
+                                className="ml-4"
+                            >
+                                Login
+                            </Button>
+                        )}
+                    </div>
 
 
                 </nav>
