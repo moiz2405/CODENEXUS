@@ -4,6 +4,37 @@
 /* slick-carousel styles */
 @import "~slick-carousel/slick/slick.css";
 @import "~slick-carousel/slick/slick-theme.css";
+.carousel-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.carousel {
+  display: flex;
+  overflow: hidden;
+  margin-top: 20px;
+}
+
+.carousel-item {
+  flex: 0 0 auto;
+  width: 300px;
+  margin: 0 10px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.carousel-item p {
+  font-size: 14px;
+  color: #333;
+}
+
+.carousel-item small {
+  display: block;
+  margin-top: 10px;
+  color: #777;
+}
 
 :root {
   --background: 240, 20%, 10%;
