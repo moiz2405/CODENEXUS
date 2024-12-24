@@ -53,7 +53,6 @@ const NavItem = ({ href, icon, label, isCollapsed }: NavItemProps) => {
     );
 };
 
-
 export default function Layout() {
     const { isDarkMode, toggleDarkMode } = useTheme();
     const { user } = useUser();
@@ -76,7 +75,8 @@ export default function Layout() {
                 className={cn(
                     "fixed left-0 top-[5rem] h-screen flex flex-col transition-all duration-300 ease-in-out shadow-lg z-50",
                     isCollapsed ? "w-30" : "w-44",
-                    isDarkMode ? "bg-[#0c0c0c] text-white" : "bg-[#E3F2FD] text-black"
+                    isDarkMode ? "bg-[#141414] text-white shadow-black" : "bg-[#E3F2FD] text-black shadow-gray-500"
+
                 )}
             >
                 <nav className="flex-1 py-6 px-3 space-y-1">
@@ -100,8 +100,8 @@ export default function Layout() {
             <div className="flex-1">
                 <nav
                     className={cn(
-                        "flex justify-between items-center px-4 py-2 fixed top-0 left-0 z-40 shadow-lg",
-                        isDarkMode ? "bg-[#0c0c0c] text-white" : "bg-[#E3F2FD] text-black"
+                        "flex justify-between items-center px-4 py-2 fixed top-0 left-0 z-40 shadow-md",
+                        isDarkMode ? "bg-[#141414] text-white shadow-black" : "bg-[#E3F2FD] text-black shadow-gray-500"
                     )}
                     style={{
                         width: "100vw",
