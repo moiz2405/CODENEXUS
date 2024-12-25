@@ -106,59 +106,66 @@ const PathCarouselWithCourses: React.FC<PathCarouselWithCoursesProps> = ({
         <button
             key={path}
             onClick={() => setSelectedPath(pathMap[path] || '')}
-            className={`px-5 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all duration-200 ease-out ${
-                isDarkMode
+            className={`px-5 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all duration-200 ease-out ${isDarkMode
                     ? selectedPath === pathMap[path]
                         ? 'bg-white text-black'
                         : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
                     : selectedPath === pathMap[path]
-                    ? 'bg-black text-white'
-                    : 'bg-gray-100 text-gray-800 border border-purple-400 hover:bg-gray-200 hover:text-black'
-            }`}>
+                        ? 'bg-black text-white'
+                        : 'bg-gray-100 text-gray-800 border border-purple-400 hover:bg-gray-200 hover:text-black'
+                }`}>
             {path}
         </button>
     ));
 
     const courseCards = validCourses.map((course) => (
-        <div key={course.id} className={`rounded-lg transition-shadow duration-300 ${isDarkMode
+        <div key={course.id} 
+        className={`rounded-lg transition-shadow duration-300 ${isDarkMode
             ? 'bg-gray-800 hover:bg-gray-700'
             : 'bg-white hover:shadow-lg border border-gray-300'}`}>
             <Image
-  className="w-full h-48 object-cover rounded-t-lg"
-  src={course.thumbnailurl || '/api/placeholder/400/300'} // Ensure placeholder URL works
-  alt={course.title}
-  width={400}  // Adjust width if needed
-  height={300} // Adjust height if needed
-  unoptimized={true}
-/>
-
+                className="w-full h-48 object-cover rounded-t-lg"
+                src={course.thumbnailurl || '/api/placeholder/400/300'} 
+                alt={course.title}
+                width={400}
+                height={300}
+                unoptimized={true}
+            />
             <div className="p-4">
                 <div className="flex justify-between items-start mb-2">
                     <h3 className={`text-lg font-semibold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
                         {course.title}
                     </h3>
-                    <span className={`text-xs px-2 py-1 rounded-full ${isDarkMode
-                        ? 'bg-gray-700 text-blue-300'
-                        : 'bg-blue-100 text-blue-800'
-                        }`}>
+                    <span className={`text-xs px-2 py-1 rounded-full ${
+                        isDarkMode
+                        ? 'bg-gray-700 text-blue-300 '
+                        : 'bg-blue-100 text-blue-800 hover:bg-blue-300'
+                        }
+                        `}>
                         {course.path}
                     </span>
                 </div>
                 {course.description && (
-                    <p className={`text-sm mb-4 line-clamp-2 ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+                    <p className={`text-sm mb-4 line-clamp-2 ${
+                        isDarkMode ? 'text-gray-300' : 'text-gray-700'
+                        }`}>
                         {course.description}
                     </p>
                 )}
-                <a
-                    href={course.videoUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`text-sm font-medium ${isDarkMode ? 'text-blue-400' : 'text-blue-600'} hover:underline`}
+                <div className="flex justify-between items-center">
+                <button
+                  onClick={() => window.open(course.videoUrl, "_blank")}
+                  className={`w-full py-2 px-4 rounded-lg transition-colors duration-300 ${
+                    isDarkMode ? "bg-blue-900 text-white hover:bg-blue-900" : "bg-blue-600 text-white hover:bg-blue-900"
+                  }`}
                 >
-                    Watch Now
-                </a>
+                  View Course
+                </button>
+                </div>
+
             </div>
         </div>
+        
     ));
 
     return (
@@ -220,8 +227,8 @@ const PathCarouselWithCourses: React.FC<PathCarouselWithCoursesProps> = ({
                                 text-sm font-medium whitespace-nowrap
                                 transition-all duration-200 ease-out
                                 ${!selectedPath
-                                ? (isDarkMode ? 'bg-white text-black' : 'bg-black text-white')
-                                : (isDarkMode ? 'bg-gray-800 text-gray-300 hover:bg-gray-700' : 'bg-gray-100 text-gray-800 border border-purple-400 hover:bg-gray-200 hover:text-black')
+                                    ? (isDarkMode ? 'bg-white text-black' : 'bg-black text-white')
+                                    : (isDarkMode ? 'bg-gray-800 text-gray-300 hover:bg-gray-700' : 'bg-gray-100 text-gray-800 border border-purple-400 hover:bg-gray-200 hover:text-black')
                                 }`}>
                             All Courses
                         </button>
