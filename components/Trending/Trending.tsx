@@ -1,5 +1,4 @@
 "use client";
-
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 
@@ -7,7 +6,7 @@ interface Course {
   id: string;
   title: string;
   videoUrl: string;
-  thumbnailUrl: string;
+  thumbnailurl: string;
   description?: string | null;
   path: string;
 }
@@ -22,14 +21,11 @@ const Trending: React.FC = () => {
 
   const fetchTrendingCourses = async () => {
     try {
-      // Fetch all courses
       const response = await fetch("/api/courses");
-      const data: Course[] = await response.json(); // Cast the response data to the correct type
-  
+      const data: Course[] = await response.json();
+
       if (response.ok) {
         setCourses(data);
-  
-        // Get unique paths from the fetched courses
         const uniquePaths = Array.from(new Set(data.map((course: Course) => course.path)));
         setPaths(uniquePaths);
       } else {
@@ -41,13 +37,12 @@ const Trending: React.FC = () => {
       setLoading(false);
     }
   };
-  
 
   const fetchCourseForPath = async (path: string) => {
     try {
       const response = await fetch(`/api/courses?path=${path}`);
       const data = await response.json();
-      return data.length > 0 ? data[0] : null;  // Get the first course of the path
+      return data.length > 0 ? data[0] : null;
     } catch (err) {
       setError("Failed to fetch course for this path");
       return null;
@@ -82,9 +77,9 @@ const Trending: React.FC = () => {
 
   return (
     <div className="space-y-6 p-2 max-w-7xl ml-20">
-      <h2 className={`text-xl font-semibold ${isDarkMode ? "text-white" : "text-blue-900"}`}>
+      <h1 className={`text-2xl font-bold ${isDarkMode ? "text-white" : "text-blue-900"}`}>
         Trending Courses
-      </h2>
+      </h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {paths.map((path) => {
           const course = pathCourses.get(path);
@@ -92,13 +87,13 @@ const Trending: React.FC = () => {
           return course ? (
             <div
               key={course.id}
-              className={`rounded-lg transition-shadow duration-300 ${
-                isDarkMode ? "bg-gray-800 hover:bg-gray-700" : "bg-white hover:shadow-lg"
+              className={`rounded-lg transition-shadow duration-300 shadow-2xl ${
+                isDarkMode ? "bg-gray-800 hover:bg-gray-700" : "bg-white hover:shadow-xl"
               }`}
             >
               <Image
                 className="w-full h-48 object-cover rounded-t-lg"
-                src={course.thumbnailUrl || "/api/placeholder/400/300"} // Use placeholder if no thumbnail URL
+                src={course.thumbnailurl || "/api/placeholder/400/300"} // Use placeholder if no thumbnail URL
                 alt={course.title}
                 width={400}
                 height={300}
@@ -110,8 +105,9 @@ const Trending: React.FC = () => {
                     {course.title}
                   </h3>
                   <span
-                    className={`text-xs px-2 py-1 rounded-full ${
-                      isDarkMode ? "bg-gray-700 text-blue-300" : "bg-blue-100 text-blue-800"
+                    className={`text-xs px-2 py-1 rounded-full ${isDarkMode
+                      ? "bg-gray-700 text-blue-300"
+                      : "bg-blue-100 text-blue-800"
                     }`}
                   >
                     {course.path}
@@ -125,7 +121,7 @@ const Trending: React.FC = () => {
                 <button
                   onClick={() => window.open(course.videoUrl, "_blank")}
                   className={`w-full py-2 px-4 rounded-lg transition-colors duration-300 ${
-                    isDarkMode ? "bg-blue-500 text-white hover:bg-blue-400" : "bg-blue-100 text-blue-900 hover:bg-blue-200"
+                    isDarkMode ? "bg-blue-900 text-white hover:bg-blue-900" : "bg-blue-600 text-white hover:bg-blue-900"
                   }`}
                 >
                   View Course
