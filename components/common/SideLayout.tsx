@@ -74,7 +74,7 @@ export default function Layout() {
             <aside
                 className={cn(
                     "fixed left-0 top-[5rem] h-screen flex flex-col transition-all duration-300 ease-in-out shadow-lg z-50",
-                    isCollapsed ? "w-30" : "w-44",
+                    isCollapsed ? "w-24" : "w-60",
                     isDarkMode ? "bg-[#141414] text-white shadow-black" : "bg-[#E3F2FD] text-black shadow-gray-500"
 
                 )}
