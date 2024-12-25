@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { openDB } from "../../../lib/db";
+import { fetchCourses, insertCourse } from "../../../lib/db";
 
 // Handle GET requests (fetch courses)
 export async function GET(req: NextRequest) {
@@ -7,28 +7,8 @@ export async function GET(req: NextRequest) {
   const path = url.searchParams.get("path");
 
   try {
-    const db = await openDB();
-    let courses;
-
-    if (!path) {
-      // If no path is specified, return all courses in random order
-      // Using RANDOM() function to shuffle the results
-      courses = await db.all(`
-        SELECT c.*
-        FROM courses c
-        LEFT JOIN (
-          SELECT path, MIN(RANDOM()) as rnd
-          FROM courses
-          GROUP BY path
-        ) r ON c.path = r.path
-        ORDER BY r.rnd, RANDOM()
-      `);
-    } else {
-      // If path is specified, filter by path
-      courses = await db.all("SELECT * FROM courses WHERE path = ?", [path]);
-    }
-
-    // Return courses regardless of whether they're empty
+    const path = url.searchParams.get("path") || "";
+    const courses = await fetchCourses(path); // Use the new fetchCourses function
     return NextResponse.json(courses, { status: 200 });
   } catch (error) {
     console.error("Error fetching courses:", error);
@@ -51,20 +31,17 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    const db = await openDB();
-    await db.run(
-      "INSERT INTO courses (title, videoUrl, thumbnailUrl, path, description) VALUES (?, ?, ?, ?, ?)",
-      [
-        title,
-        videoUrl,
-        thumbnailUrl || "/api/placeholder/400/300",
-        path,
-        description || null
-      ]
-    );
+    const course = {
+      title,
+      videoUrl,
+      thumbnailUrl: thumbnailUrl || "/api/placeholder/400/300", // Provide a default placeholder
+      path,
+      description: description || null,
+    };
 
+    const result = await insertCourse(course); // Use the new insertCourse function
     return NextResponse.json(
-      { message: "Course added successfully" },
+      { message: "Course added successfully", course: result },
       { status: 201 }
     );
   } catch (error) {
