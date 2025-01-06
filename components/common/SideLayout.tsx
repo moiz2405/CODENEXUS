@@ -64,8 +64,8 @@ export default function Layout() {
         { href: "/courses", icon: <BookOpen className="w-6 h-6" />, label: "Courses" },
         { href: "/trending", icon: <TrendingUp className="w-6 h-6" />, label: "Trending" },
         // { href: "/resume", icon: <FileText className="w-6 h-6" />, label: "Resume Builder" },
-        { href: "/creator", icon: <Users className="w-6 h-6" />, label: "Creator Access" },
         { href: "/feedback", icon: <MessageSquare className="w-6 h-6" />, label: "Send Feedback" },
+        { href: "/creator", icon: <Users className="w-6 h-6" />, label: "Creator Access" },
     ];
 
     return (
