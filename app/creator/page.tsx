@@ -1,5 +1,5 @@
 import React from 'react'
-import './page.css'
+import '../../styles/page.css'
 
 function Page() {
     return (
